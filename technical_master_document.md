@@ -3,7 +3,7 @@
 ## 1. Technology Stack
 *   **Backend / API:** Python 3.10+, FastAPI (Asynchronous API framework)
 *   **Frontend:** React.js, AG Grid (Sponsor Tool for high-density data tables)
-*   **AI / LLM:** OpenAI API (GPT-4o) or Anthropic Claude 3.5 Sonnet
+*   **AI / LLM:** Google Gemini API (Gemini 2.0 / 1.5 Flash / Pro) as primary synthesis model (with OpenAI/Claude adapter support)
 *   **Vector & Document Store:** Elastic (Sponsor Tool for indexing merchant data)
 *   **Hosting / Deployment:** Render (Sponsor Tool for hosting backend/webhooks)
 

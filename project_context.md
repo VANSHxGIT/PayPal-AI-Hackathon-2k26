@@ -11,6 +11,7 @@ This project was conceived for the "Build What's Next with PayPal and AI" hackat
 
 ## Core Architectural Decisions
 *   **Python/FastAPI:** Chosen for native async support, making it ideal for handling webhooks and parallel AI processing.
+*   **Google Gemini:** Chosen as the primary AI synthesis engine for structured legal evidence generation and speed.
 *   **Elastic (Sponsor):** Chosen as the vector/search database to simulate a merchant's internal logistics and CRM database for RAG operations.
 *   **AG Grid (Sponsor):** Chosen to handle the frontend UI, specifically because enterprise merchants require dense data tables to manage dispute queues.
 *   **Render (Sponsor):** Chosen for rapid deployment and providing a stable public URL for PayPal webhooks.
