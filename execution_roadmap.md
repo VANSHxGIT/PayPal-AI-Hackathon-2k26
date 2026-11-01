@@ -28,4 +28,4 @@
     *   *0:00-0:45*: Intro & Problem statement.
     *   *0:45-2:15*: Live Demo (Open dispute in Sandbox -> watch dashboard update -> view AI evidence).
     *   *2:15-3:00*: Architecture & conclusion.
-- [ ] Submit before the deadline.
+- [ ] Submit before the deadline. 
