@@ -1,0 +1,37 @@
+# ==============================================================================
+# DisputeMind AI — Render Blueprint Specification (Sponsor Tool)
+# ==============================================================================
+
+services:
+  - type: web
+    name: disputemind-api
+    runtime: python
+    buildCommand: "cd backend && pip install -r requirements.txt"
+    startCommand: "cd backend && python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    plan: free
+    region: oregon
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: DEBUG
+        value: "false"
+      - key: PAYPAL_MODE
+        value: sandbox
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.0-flash
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "60"
+      - key: DATABASE_URL
+        value: "sqlite:///./disputemind.db"
+      - key: BACKUP_DIR
+        value: "./backups"
+      - key: BACKUP_RETENTION_DAYS
+        value: "7"

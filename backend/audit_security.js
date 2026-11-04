@@ -184,12 +184,12 @@ check(13, "Update Old Packages", () => {
 check(14, "Hide Error Messages From Users", () => {
   const errPy = fs.readFileSync(path.join(backendDir, 'app', 'core', 'error_handlers.py'), 'utf-8');
   const mainPy = fs.readFileSync(path.join(backendDir, 'app', 'main.py'), 'utf-8');
-  const hasMasking = errPy.includes('unhandled_exception_handler') && errPy.includes('reference_id = str(uuid.uuid4())');
-  const hasSanitizedMsg = errPy.includes('Internal Server Error') && !errPy.includes('str(exc)') /* in client content */;
+  const hasMasking = errPy.includes('unhandled_exception_handler') && errPy.includes('ref_id = str(uuid.uuid4())');
+  const hasSanitizedMsg = errPy.includes('Internal Server Error') && errPy.includes('"reference_id": ref_id');
   const isRegistered = mainPy.includes('app.add_exception_handler(Exception, unhandled_exception_handler)');
   return {
-    pass: hasMasking && isRegistered,
-    message: hasMasking && isRegistered ? "Global exception handler logs internal stack traces server-side and returns sanitized JSON with UUID reference ID" : "Error messages leaked"
+    pass: hasMasking && hasSanitizedMsg && isRegistered,
+    message: hasMasking && hasSanitizedMsg && isRegistered ? "Global exception handler logs internal stack traces server-side and returns sanitized JSON with UUID reference ID" : "Error messages leaked"
   };
 });
 
