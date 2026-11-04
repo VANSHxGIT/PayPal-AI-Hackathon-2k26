@@ -94,3 +94,4 @@ class TestSecurityAudit:
         assert prod_settings.docs_url is None
         assert prod_settings.redoc_url is None
         assert prod_settings.openapi_url is None
+

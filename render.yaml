@@ -35,3 +35,4 @@ services:
         value: "./backups"
       - key: BACKUP_RETENTION_DAYS
         value: "7"
+

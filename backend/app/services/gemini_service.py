@@ -128,3 +128,4 @@ Your role is to formulate a compelling, objective, and definitive defense agains
 
 
 gemini_service = GeminiService()
+

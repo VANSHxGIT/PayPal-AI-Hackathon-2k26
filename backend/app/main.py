@@ -141,3 +141,4 @@ async def health_check():
         "paypal_mode": settings.PAYPAL_MODE,
         "ai_model": settings.GEMINI_MODEL
     }
+

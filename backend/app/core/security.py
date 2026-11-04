@@ -107,3 +107,4 @@ def revoke_token(token: str) -> bool:
         return False
     except jwt.PyJWTError:
         return False
+

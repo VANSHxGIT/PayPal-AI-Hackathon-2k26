@@ -37,3 +37,4 @@ async def stream_logs():
             "X-Accel-Buffering": "no"
         }
     )
+

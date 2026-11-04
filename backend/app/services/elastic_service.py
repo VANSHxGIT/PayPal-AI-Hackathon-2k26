@@ -140,3 +140,4 @@ class ElasticService:
 
 
 elastic_service = ElasticService()
+

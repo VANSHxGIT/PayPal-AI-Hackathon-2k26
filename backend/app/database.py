@@ -55,3 +55,4 @@ def init_db():
                 os.chmod(db_path, 0o600)
             except Exception:
                 pass  # Handled gracefully on Windows systems where POSIX chmod is limited
+

@@ -142,3 +142,4 @@ async def logout(token: str = Depends(oauth2_scheme)):
     """
     revoke_token(token)
     return {"success": True, "message": "Successfully logged out and session revoked."}
+

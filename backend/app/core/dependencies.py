@@ -63,3 +63,4 @@ async def get_current_merchant_id(
     Provides the merchant_id of the authenticated user to scope all database operations.
     """
     return current_user.merchant_id
+

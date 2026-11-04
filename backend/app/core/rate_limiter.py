@@ -89,3 +89,4 @@ def rate_limit(max_requests: int = 60, window_seconds: int = 60):
         key = f"{client_ip}:{endpoint}"
         limiter.check_rate_limit(key, max_requests=max_requests, window_seconds=window_seconds)
     return dependency
+

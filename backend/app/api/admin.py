@@ -105,3 +105,4 @@ async def get_security_status(
         "backup_retention_days": settings.BACKUP_RETENTION_DAYS,
         "tenant_isolation_enforced": True
     }
+

@@ -113,3 +113,4 @@ class AuditLog(Base):
     details = Column(Text, nullable=True)
     ip_address = Column(String(64), nullable=True)
     timestamp = Column(DateTime(timezone=True), default=get_utc_now, nullable=False)
+
