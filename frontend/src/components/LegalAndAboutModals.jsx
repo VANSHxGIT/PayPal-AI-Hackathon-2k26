@@ -191,3 +191,4 @@ export const AboutUsModal = ({ isOpen, onClose }) => {
     </div>
   );
 };
+

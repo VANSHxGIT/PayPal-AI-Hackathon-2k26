@@ -73,3 +73,4 @@ export const SlidersIcon = ({ className = "w-4 h-4" }) => (
     <line x1="17" y1="16" x2="23" y2="16"/>
   </svg>
 );
+
