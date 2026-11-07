@@ -1,9 +1,7 @@
 import asyncio
 import logging
-from fastapi import APIRouter, Request, BackgroundTasks, status, Response, Depends
-from sqlalchemy.orm import Session
-
-from app.database import get_db, SessionLocal
+from fastapi import APIRouter, Request, BackgroundTasks, status, Response
+from app.database import SessionLocal
 from app.services.dispute_orchestrator import orchestrator
 from app.core.rate_limiter import limiter
 from app.config import settings
