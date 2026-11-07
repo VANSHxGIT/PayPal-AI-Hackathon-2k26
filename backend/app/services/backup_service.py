@@ -4,7 +4,7 @@ import time
 import sqlite3
 import asyncio
 import logging
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 from typing import List, Dict, Any
 from app.config import settings
 
