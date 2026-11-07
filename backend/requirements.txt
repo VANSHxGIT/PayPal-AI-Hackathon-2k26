@@ -1,0 +1,38 @@
+# ==============================================================================
+# DisputeMind AI — Modern, Audited & Secure Dependencies (Item 13)
+# ==============================================================================
+
+# Core Framework & Server
+fastapi>=0.115.4
+uvicorn[standard]>=0.32.0
+
+# Data Validation & Settings (Item 6 & 1)
+pydantic>=2.9.2
+pydantic-settings>=2.6.1
+email-validator>=2.2.0
+
+# Cryptography, Auth & Security (Item 4, 8, 9)
+PyJWT>=2.9.0
+passlib[bcrypt]>=1.7.4
+bcrypt>=4.2.0
+python-multipart>=0.0.17
+
+# Database & ORM (Item 10)
+sqlalchemy>=2.0.36
+
+# Google Gemini AI Integration (Primary Synthesis Model)
+google-generativeai>=0.8.3
+google-genai>=1.0.0
+
+# HTTP Client & PayPal Sandbox Integrations
+httpx>=0.27.2
+
+# Elastic Search Integration (Sponsor Tool)
+elasticsearch>=8.15.1
+
+# Environment & Config
+python-dotenv>=1.0.1
+
+# Testing & Security Verification (Item 16)
+pytest>=8.3.3
+pytest-asyncio>=0.24.0
