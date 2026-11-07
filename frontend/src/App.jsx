@@ -146,8 +146,25 @@ export default function App() {
       </header>
 
       {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-6 md:p-8 space-y-8">
+      <main className="flex-1 max-w-7xl w-full mx-auto p-6 md:p-8 space-y-6">
         
+        {/* Architecture Pipeline Telemetry Strip */}
+        <div className="border border-borderline bg-surface-light px-4 py-2.5 flex flex-wrap items-center justify-between text-xs font-mono text-ink-secondary rounded-[2px] gap-2">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 bg-periwinkle" />
+            <span className="font-semibold text-ink uppercase text-[11px] tracking-wide">Autonomous Adjudication Loop</span>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 text-[11px] text-ink-muted">
+            <span className="text-ink font-medium">01 Inbound Webhook</span>
+            <span className="text-borderline">/</span>
+            <span className="text-ink font-medium">02 Elastic RAG Telemetry</span>
+            <span className="text-borderline">/</span>
+            <span className="text-ink font-medium">03 Gemini Legal Synthesis</span>
+            <span className="text-borderline">/</span>
+            <span className="text-ink font-medium">04 PayPal REST Submission</span>
+          </div>
+        </div>
+
         {/* Banking Overview Section (Scrolltide U-Banking Inspo + Maxim Mukhanov 3D Card) */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           
