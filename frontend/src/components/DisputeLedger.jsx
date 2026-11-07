@@ -7,7 +7,7 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
  * Enterprise Dispute Ledger built on AG Grid (Sponsor Tool).
  * Displays dense financial transaction records with custom status renderers.
  */
-export const DisputeLedger = ({ disputes, onSelectDispute, selectedDisputeId }) => {
+export const DisputeLedger = ({ disputes, onSelectDispute }) => {
 
   const columnDefs = useMemo(() => [
     {
