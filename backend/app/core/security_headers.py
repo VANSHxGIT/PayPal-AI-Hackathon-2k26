@@ -22,22 +22,10 @@ class SecurityHeadersMiddleware:
         if settings.is_production:
             proto = headers.get("x-forwarded-proto", scope.get("scheme", "http"))
             if proto != "https":
-                # Redirect to HTTPS
                 host = headers.get("host", "localhost")
                 path = scope.get("path", "/")
                 query = scope.get("query_string", b"").decode("utf-8")
-                url = f"https://{host}{path}"
-                if query:
-                    url += f"?{query}"
-
-                async def redirect_send(message):
-                    if message["type"] == "http.response.start":
-                        message["status"] = 301
-                        headers_list = list(message.get("headers", []))
-                        headers_list.append((b"location", url.encode("utf-8")))
-                        headers_list.append((b"strict-transport-security", b"max-age=31536000; includeSubDomains; preload"))
-                        message["headers"] = headers_list
-                    await send(message)
+                url = f"https://{host}{path}" + (f"?{query}" if query else "")
 
                 await send({
                     "type": "http.response.start",
