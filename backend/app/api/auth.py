@@ -8,7 +8,7 @@ from app.models.db_models import User
 from app.models.schemas import UserRegisterRequest, UserLoginRequest, TokenResponse, UserProfileResponse
 from app.core.security import hash_password, verify_password, create_access_token, revoke_token
 from app.core.dependencies import get_current_user, oauth2_scheme
-from app.core.rate_limiter import limiter, rate_limit
+from app.core.rate_limiter import limiter
 from app.config import settings
 
 router = APIRouter(prefix="/api/auth", tags=["Authentication & Access"])
