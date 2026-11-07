@@ -19,7 +19,7 @@ async def stream_logs():
     async def event_generator():
         try:
             # Yield initial connection message
-            yield "data: {\"timestamp\": \"SYS\", \"level\": \"INFO\", \"message\": \"🟢 Connected to DisputeMind AI Live Event Stream\"}\n\n"
+            yield "data: {\"timestamp\": \"SYS\", \"level\": \"INFO\", \"message\": \"[SYSTEM] Connected to DisputeMind AI Live Event Stream\"}\n\n"
             while True:
                 data = await queue.get()
                 yield f"data: {data}\n\n"
