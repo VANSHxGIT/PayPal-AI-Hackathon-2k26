@@ -234,7 +234,6 @@ export default function App() {
               merchantName="Apex Electronics Store"
               merchantId="MERC-DEFAULT-001"
               protectedVolume={`$${totalProtected.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
-              activeCases={disputes.length}
             />
           </div>
         </section>

@@ -8,8 +8,7 @@ import React, { useState, useRef } from 'react';
 export const InteractiveCard3D = ({
   merchantName = "Apex Electronics Ltd",
   merchantId = "MERC-DEFAULT-001",
-  protectedVolume = "$148,920.00",
-  activeCases = 3
+  protectedVolume = "$148,920.00"
 }) => {
   const cardRef = useRef(null);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
