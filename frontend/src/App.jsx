@@ -3,7 +3,7 @@ import { InteractiveCard3D } from './components/InteractiveCard3D';
 import { DisputeLedger } from './components/DisputeLedger';
 import { EvidenceInspector } from './components/EvidenceInspector';
 import { TermsOfServiceModal, PrivacyPolicyModal, AboutUsModal } from './components/LegalAndAboutModals';
-import { ShieldIcon, RefreshIcon, SlidersIcon } from './components/Icons';
+import { RefreshIcon } from './components/Icons';
 
 const INITIAL_DISPUTES = [
   {
