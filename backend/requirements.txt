@@ -36,3 +36,4 @@ python-dotenv>=1.0.1
 # Testing & Security Verification (Item 16)
 pytest>=8.3.3
 pytest-asyncio>=0.24.0
+
