@@ -5,11 +5,11 @@ export const TermsOfServiceModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
-      <div className="bg-canvas border border-borderline max-w-2xl w-full p-6 max-h-[85vh] flex flex-col rounded-[2px]">
-        <div className="flex items-center justify-between pb-4 border-b border-borderline">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80">
+      <div className="bg-[#0F141F] border border-[#1E293B] max-w-2xl w-full p-6 max-h-[85vh] flex flex-col rounded-[2px]">
+        <div className="flex items-center justify-between pb-4 border-b border-[#1E293B]">
           <div className="flex items-center gap-2">
-            <FileTextIcon className="w-4 h-4 text-periwinkle" />
+            <FileTextIcon className="w-4 h-4 text-accent" />
             <h2 className="font-serif text-lg font-semibold text-ink">Terms of Service</h2>
           </div>
           <button onClick={onClose} className="p-1 text-ink-muted hover:text-ink">
@@ -53,10 +53,10 @@ export const TermsOfServiceModal = ({ isOpen, onClose }) => {
           </div>
         </div>
 
-        <div className="pt-4 border-t border-borderline flex justify-end">
+        <div className="pt-4 border-t border-[#1E293B] flex justify-end">
           <button
             onClick={onClose}
-            className="px-4 py-1.5 bg-ink text-white font-mono text-xs hover:bg-ink-secondary rounded-[2px]"
+            className="px-4 py-1.5 bg-accent text-white font-mono text-xs hover:bg-accent-navy rounded-[2px]"
           >
             ACKNOWLEDGE & CLOSE
           </button>
@@ -70,11 +70,11 @@ export const PrivacyPolicyModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
-      <div className="bg-canvas border border-borderline max-w-2xl w-full p-6 max-h-[85vh] flex flex-col rounded-[2px]">
-        <div className="flex items-center justify-between pb-4 border-b border-borderline">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80">
+      <div className="bg-[#0F141F] border border-[#1E293B] max-w-2xl w-full p-6 max-h-[85vh] flex flex-col rounded-[2px]">
+        <div className="flex items-center justify-between pb-4 border-b border-[#1E293B]">
           <div className="flex items-center gap-2">
-            <LockIcon className="w-4 h-4 text-periwinkle" />
+            <LockIcon className="w-4 h-4 text-accent" />
             <h2 className="font-serif text-lg font-semibold text-ink">Privacy & Data Governance Policy</h2>
           </div>
           <button onClick={onClose} className="p-1 text-ink-muted hover:text-ink">
@@ -118,10 +118,10 @@ export const PrivacyPolicyModal = ({ isOpen, onClose }) => {
           </div>
         </div>
 
-        <div className="pt-4 border-t border-borderline flex justify-end">
+        <div className="pt-4 border-t border-[#1E293B] flex justify-end">
           <button
             onClick={onClose}
-            className="px-4 py-1.5 bg-ink text-white font-mono text-xs hover:bg-ink-secondary rounded-[2px]"
+            className="px-4 py-1.5 bg-accent text-white font-mono text-xs hover:bg-accent-navy rounded-[2px]"
           >
             CONFIRM & CLOSE
           </button>
@@ -135,11 +135,11 @@ export const AboutUsModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
-      <div className="bg-canvas border border-borderline max-w-2xl w-full p-6 max-h-[85vh] flex flex-col rounded-[2px]">
-        <div className="flex items-center justify-between pb-4 border-b border-borderline">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80">
+      <div className="bg-[#0F141F] border border-[#1E293B] max-w-2xl w-full p-6 max-h-[85vh] flex flex-col rounded-[2px]">
+        <div className="flex items-center justify-between pb-4 border-b border-[#1E293B]">
           <div className="flex items-center gap-2">
-            <ShieldIcon className="w-4 h-4 text-periwinkle" />
+            <ShieldIcon className="w-4 h-4 text-accent" />
             <h2 className="font-serif text-lg font-semibold text-ink">Adjudication Architecture & Methodology</h2>
           </div>
           <button onClick={onClose} className="p-1 text-ink-muted hover:text-ink">
@@ -161,7 +161,7 @@ export const AboutUsModal = ({ isOpen, onClose }) => {
             <p>
               DisputeMind AI replaces manual investigation with an event-driven RAG architecture:
             </p>
-            <div className="bg-surface-card p-3 border border-borderline space-y-1.5 my-2">
+            <div className="bg-[#141B28] p-3 border border-[#1E293B] space-y-1.5 my-2">
               <div>1. PayPal fires CUSTOMER.DISPUTE.CREATED webhook to the FastAPI backend.</div>
               <div>2. The dispute orchestrator queries Elastic by transaction ID to retrieve shipping telemetry and CRM chat logs.</div>
               <div>3. Google Gemini synthesizes an evidence statement adhering to PayPal Merchant Protection requirements.</div>
@@ -179,10 +179,10 @@ export const AboutUsModal = ({ isOpen, onClose }) => {
           </div>
         </div>
 
-        <div className="pt-4 border-t border-borderline flex justify-end">
+        <div className="pt-4 border-t border-[#1E293B] flex justify-end">
           <button
             onClick={onClose}
-            className="px-4 py-1.5 bg-ink text-white font-mono text-xs hover:bg-ink-secondary rounded-[2px]"
+            className="px-4 py-1.5 bg-accent text-white font-mono text-xs hover:bg-accent-navy rounded-[2px]"
           >
             DISMISS
           </button>
@@ -191,4 +191,3 @@ export const AboutUsModal = ({ isOpen, onClose }) => {
     </div>
   );
 };
-
