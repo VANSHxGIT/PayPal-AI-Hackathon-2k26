@@ -146,3 +146,4 @@ export const PipelineWorkflow = () => {
     </section>
   );
 };
+
