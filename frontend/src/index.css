@@ -4,27 +4,28 @@
 
 @layer base {
   * {
-    border-color: #D2D7E0;
+    border-color: #1E293B;
     box-shadow: none !important;
   }
   
   body {
-    background-color: #ECEEF1;
-    color: #11141A;
+    background-color: #0B0E14;
+    color: #F1F5F9;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     font-variant-numeric: tabular-nums;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 
-  /* Explicitly prevent drop shadows */
+  /* Strictly prohibit drop shadows and text shadows across the application */
   *, *::before, *::after {
     box-shadow: none !important;
     text-shadow: none !important;
   }
 }
 
-/* 3D Perspective Container for Interactive Merchant Card */
+/* 3D Perspective Container for Rotating Merchant Security Card */
 .preserve-3d {
   transform-style: preserve-3d;
 }
@@ -33,38 +34,37 @@
   perspective: 1000px;
 }
 
-/* Custom AG Grid Clean Minimalist Banking Overrides */
+/* Institutional AG Grid Dark Financial Terminal Styling */
 .ag-theme-alpine {
-  --ag-background-color: #F4F6F9;
-  --ag-header-background-color: #E6EAF0;
-  --ag-border-color: #D2D7E0;
-  --ag-header-foreground-color: #363D4D;
-  --ag-foreground-color: #11141A;
-  --ag-row-hover-color: #EAEEF4;
-  --ag-selected-row-background-color: #E2E6EF;
+  --ag-background-color: #0F141F;
+  --ag-header-background-color: #141B28;
+  --ag-border-color: #1E293B;
+  --ag-header-foreground-color: #CBD5E1;
+  --ag-foreground-color: #F1F5F9;
+  --ag-row-hover-color: #182232;
+  --ag-selected-row-background-color: #1E2B3E;
   --ag-font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   --ag-font-size: 13px;
-  --ag-cell-horizontal-border: solid #D2D7E0;
+  --ag-cell-horizontal-border: solid #1E293B;
   --ag-row-border-style: solid;
-  --ag-row-border-color: #D2D7E0;
-  --ag-header-column-separator-color: #D2D7E0;
-  border: 1px solid #D2D7E0;
+  --ag-row-border-color: #1E293B;
+  --ag-header-column-separator-color: #1E293B;
+  border: 1px solid #1E293B;
   border-radius: 2px;
 }
 
-/* Crisp Industrial Scrollbar */
+/* Crisp Industrial Slate Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #E4E8EE;
+  background: #0B0E14;
 }
 ::-webkit-scrollbar-thumb {
-  background: #B4BCC8;
+  background: #222C3F;
   border-radius: 0px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #8A96A6;
+  background: #334155;
 }
-
