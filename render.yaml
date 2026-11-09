@@ -6,11 +6,14 @@ services:
   - type: web
     name: disputemind-api
     runtime: python
-    buildCommand: "cd backend && pip install -r requirements.txt"
-    startCommand: "cd backend && python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    rootDir: backend
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"
     plan: free
     region: oregon
     envVars:
+      - key: PYTHONPATH
+        value: ".:backend"
       - key: ENVIRONMENT
         value: production
       - key: DEBUG
@@ -35,4 +38,3 @@ services:
         value: "./backups"
       - key: BACKUP_RETENTION_DAYS
         value: "7"
-
