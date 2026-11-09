@@ -5,9 +5,9 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 /**
  * Enterprise Dispute Ledger built on AG Grid (Sponsor Tool).
- * Displays dense financial transaction records with custom status renderers.
+ * High-density financial transaction table styled in dark institutional palette.
  */
-export const DisputeLedger = ({ disputes, onSelectDispute }) => {
+export const DisputeLedger = ({ disputes, onSelectDispute, selectedDisputeId }) => {
 
   const columnDefs = useMemo(() => [
     {
@@ -15,14 +15,14 @@ export const DisputeLedger = ({ disputes, onSelectDispute }) => {
       field: "id",
       minWidth: 160,
       cellRenderer: (params) => (
-        <span className="font-mono text-xs font-semibold text-periwinkle hover:underline cursor-pointer">
+        <span className="font-mono text-xs font-semibold text-accent hover:underline cursor-pointer">
           {params.value}
         </span>
       ),
       pinned: 'left'
     },
     {
-      headerName: "PAYPAL TRANSACTION",
+      headerName: "PAYPAL TXN REF",
       field: "transaction_id",
       minWidth: 160,
       cellRenderer: (params) => (
@@ -40,47 +40,47 @@ export const DisputeLedger = ({ disputes, onSelectDispute }) => {
       headerClass: "text-right"
     },
     {
-      headerName: "REASON CODE",
+      headerName: "CHARGEBACK REASON",
       field: "reason",
-      minWidth: 220,
+      minWidth: 240,
       cellRenderer: (params) => (
         <span className="font-mono text-[11px] text-ink-muted uppercase">
-          {params.value.replace(/_/g, " ")}
+          {params.value ? params.value.replace(/_/g, " ") : ""}
         </span>
       )
     },
     {
-      headerName: "EVIDENCE CATEGORY",
+      headerName: "RETRIEVED EVIDENCE",
       field: "evidence_type",
       minWidth: 180,
       cellRenderer: (params) => (
         <span className="font-mono text-[11px] text-ink-secondary">
-          {params.value ? params.value.replace(/_/g, " ") : "SYNTHESIZING"}
+          {params.value ? params.value.replace(/_/g, " ") : "SYNTHESIZING..."}
         </span>
       )
     },
     {
-      headerName: "EXECUTION TIME",
+      headerName: "DEFENSE SLA",
       field: "execution_time_seconds",
-      minWidth: 130,
+      minWidth: 120,
       valueFormatter: (params) => params.value ? `${params.value}s` : "Pending",
       cellClass: "font-mono text-xs text-ink-muted"
     },
     {
-      headerName: "STATUS",
+      headerName: "ADJUDICATION STATE",
       field: "status",
-      minWidth: 150,
+      minWidth: 160,
       cellRenderer: (params) => {
         const status = params.value;
-        let badgeStyle = "bg-slate-200 text-ink-secondary border-slate-300";
+        let badgeStyle = "bg-[#1E293B] text-slate-300 border-[#334155]";
         if (status === "AUTO_DEFENDED") {
-          badgeStyle = "bg-emerald-100/70 text-emerald-900 border-emerald-300";
+          badgeStyle = "bg-[#064E3B]/60 text-emerald-300 border-[#059669]";
         } else if (status === "PROCESSING") {
-          badgeStyle = "bg-blue-100/70 text-blue-900 border-blue-300";
+          badgeStyle = "bg-[#1E3A8A]/60 text-blue-300 border-[#2563EB]";
         }
 
         return (
-          <span className={`inline-block px-2 py-0.5 text-[10px] font-mono font-medium border rounded-[2px] ${badgeStyle}`}>
+          <span className={`inline-block px-2 py-0.5 text-[10px] font-mono font-medium border rounded-[1px] ${badgeStyle}`}>
             {status}
           </span>
         );
@@ -109,11 +109,10 @@ export const DisputeLedger = ({ disputes, onSelectDispute }) => {
         defaultColDef={defaultColDef}
         onRowClicked={handleRowClick}
         rowSelection="single"
-        headerHeight={36}
-        rowHeight={38}
+        headerHeight={38}
+        rowHeight={40}
         animateRows={false}
       />
     </div>
   );
 };
-
