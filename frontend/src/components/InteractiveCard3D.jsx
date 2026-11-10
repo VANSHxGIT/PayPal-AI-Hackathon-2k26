@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 /**
- * Interactive 3D Merchant Security Card (Augustus + Maxim Mukhanov Inspiration)
- * Rotates dynamically on the Y/X axes as the user scrolls down the page,
- * combined with high-precision cursor tilt tracking when the pointer is active.
+ * Interactive 3D Merchant Security Card
+ * Optimized with requestAnimationFrame for smooth 60fps rotation on scroll and mouse tilt.
  */
 export const InteractiveCard3D = ({
   merchantName = "Apex Global Fulfillment",
@@ -14,15 +13,23 @@ export const InteractiveCard3D = ({
   const cardRef = useRef(null);
   const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
+  const rafId = useRef(null);
+
+  const handleScroll = useCallback(() => {
+    if (rafId.current) return;
+    rafId.current = requestAnimationFrame(() => {
+      setScrollY(window.scrollY);
+      rafId.current = null;
+    });
+  }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+    };
+  }, [handleScroll]);
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
@@ -42,8 +49,7 @@ export const InteractiveCard3D = ({
     setMouseOffset({ x: 0, y: 0 });
   };
 
-  // Compute scroll-driven 3D angle (smooth continuous rotation across first 1000px of scroll)
-  const scrollRotationY = Math.min(scrollY * 0.08, 45); // up to 45 deg tilt
+  const scrollRotationY = Math.min(scrollY * 0.08, 45);
   const scrollRotationX = Math.min(scrollY * 0.04, 25);
   const scrollTranslateZ = Math.min(scrollY * 0.05, 40);
 
@@ -64,7 +70,7 @@ export const InteractiveCard3D = ({
         }}
         className="preserve-3d relative w-full h-[250px] bg-[#111722] border border-[#26354D] p-6 flex flex-col justify-between overflow-hidden cursor-crosshair text-white rounded-[2px]"
       >
-        {/* Subtle metallic hairline grid accent inside card */}
+        {/* Subtle metallic hairline grid accent */}
         <div 
           className="pointer-events-none absolute inset-0 opacity-15"
           style={{
@@ -88,7 +94,6 @@ export const InteractiveCard3D = ({
 
         {/* Tactile EMV Microchip & Capital Protected Metric */}
         <div className="flex items-center justify-between my-2 relative z-10" style={{ transform: 'translateZ(34px)' }}>
-          {/* Physical style EMV Chip */}
           <div className="w-11 h-8 bg-[#C2A366] border border-[#8B703C] p-1 grid grid-cols-2 gap-0.5 relative rounded-[1px]">
             <div className="border border-[#725B2C] h-full" />
             <div className="border border-[#725B2C] h-full" />
