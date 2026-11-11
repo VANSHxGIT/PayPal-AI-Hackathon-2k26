@@ -13,7 +13,7 @@ services:
     region: oregon
     envVars:
       - key: PYTHONPATH
-        value: ".:backend"
+        value: "."
       - key: ENVIRONMENT
         value: production
       - key: DEBUG
