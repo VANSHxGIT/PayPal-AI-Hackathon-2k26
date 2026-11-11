@@ -4,113 +4,101 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 /**
- * Enterprise Dispute Ledger built on AG Grid (Sponsor Tool).
- * High-density financial transaction table styled in dark institutional palette.
+ * AG Grid Dispute Ledger — Wise Light Design
+ * Forest Ink headers, Linen Mist row hover, Lime Voltage status pills.
  */
-export const DisputeLedger = ({ disputes, onSelectDispute, selectedDisputeId }) => {
-
+export const DisputeLedger = ({ disputes, onSelectDispute }) => {
   const columnDefs = useMemo(() => [
     {
-      headerName: "CASE IDENTIFIER",
+      headerName: "CASE ID",
       field: "id",
-      minWidth: 160,
-      cellRenderer: (params) => (
-        <span className="font-mono text-xs font-semibold text-accent hover:underline cursor-pointer">
-          {params.value}
+      minWidth: 150,
+      cellRenderer: (p) => (
+        <span style={{ color: '#163300', fontWeight: 700, fontFamily: 'IBM Plex Mono', fontSize: 13, cursor: 'pointer', letterSpacing: '-0.3px' }}>
+          {p.value}
         </span>
       ),
-      pinned: 'left'
+      pinned: 'left',
     },
     {
-      headerName: "PAYPAL TXN REF",
+      headerName: "PAYPAL TXN",
       field: "transaction_id",
-      minWidth: 160,
-      cellRenderer: (params) => (
-        <span className="font-mono text-xs text-ink-secondary">
-          {params.value}
-        </span>
-      )
+      minWidth: 150,
+      cellRenderer: (p) => (
+        <span style={{ color: '#868685', fontFamily: 'IBM Plex Mono', fontSize: 12 }}>{p.value}</span>
+      ),
     },
     {
-      headerName: "DISPUTED CAPITAL",
+      headerName: "DISPUTED AMOUNT",
       field: "amount",
-      minWidth: 140,
-      valueFormatter: (params) => `$${Number(params.value).toFixed(2)} USD`,
-      cellClass: "font-mono text-xs font-semibold text-ink text-right",
-      headerClass: "text-right"
+      minWidth: 150,
+      valueFormatter: (p) => `$${Number(p.value).toFixed(2)} USD`,
+      cellStyle: { color: '#163300', fontWeight: 700, fontFamily: 'IBM Plex Mono', fontSize: 14, textAlign: 'right' },
+      headerClass: 'text-right',
     },
     {
-      headerName: "CHARGEBACK REASON",
+      headerName: "REASON",
       field: "reason",
-      minWidth: 240,
-      cellRenderer: (params) => (
-        <span className="font-mono text-[11px] text-ink-muted uppercase">
-          {params.value ? params.value.replace(/_/g, " ") : ""}
+      minWidth: 230,
+      cellRenderer: (p) => (
+        <span style={{ color: '#6a6c6a', fontFamily: 'IBM Plex Mono', fontSize: 12 }}>
+          {p.value ? p.value.replace(/_/g, ' ') : ''}
         </span>
-      )
+      ),
     },
     {
-      headerName: "RETRIEVED EVIDENCE",
+      headerName: "EVIDENCE",
       field: "evidence_type",
       minWidth: 180,
-      cellRenderer: (params) => (
-        <span className="font-mono text-[11px] text-ink-secondary">
-          {params.value ? params.value.replace(/_/g, " ") : "SYNTHESIZING..."}
+      cellRenderer: (p) => (
+        <span style={{ color: '#454745', fontFamily: 'IBM Plex Mono', fontSize: 12 }}>
+          {p.value ? p.value.replace(/_/g, ' ') : 'SYNTHESIZING...'}
         </span>
-      )
+      ),
     },
     {
-      headerName: "DEFENSE SLA",
+      headerName: "SLA",
       field: "execution_time_seconds",
-      minWidth: 120,
-      valueFormatter: (params) => params.value ? `${params.value}s` : "Pending",
-      cellClass: "font-mono text-xs text-ink-muted"
+      minWidth: 100,
+      valueFormatter: (p) => p.value ? `${p.value}s` : 'Pending',
+      cellStyle: { color: '#868685', fontFamily: 'IBM Plex Mono', fontSize: 12 },
     },
     {
-      headerName: "ADJUDICATION STATE",
+      headerName: "STATUS",
       field: "status",
       minWidth: 160,
-      cellRenderer: (params) => {
-        const status = params.value;
-        let badgeStyle = "bg-[#1E293B] text-slate-300 border-[#334155]";
-        if (status === "AUTO_DEFENDED") {
-          badgeStyle = "bg-[#064E3B]/60 text-emerald-300 border-[#059669]";
-        } else if (status === "PROCESSING") {
-          badgeStyle = "bg-[#1E3A8A]/60 text-blue-300 border-[#2563EB]";
-        }
-
+      cellRenderer: (p) => {
+        const v = p.value;
+        let bg = '#e8ebe6', color = '#454745';
+        if (v === 'AUTO_DEFENDED') { bg = '#e2f6d5'; color = '#163300'; }
+        if (v === 'PROCESSING')    { bg = '#163300'; color = '#9fe870'; }
         return (
-          <span className={`inline-block px-2 py-0.5 text-[10px] font-mono font-medium border rounded-[1px] ${badgeStyle}`}>
-            {status}
+          <span style={{
+            display: 'inline-block', padding: '3px 12px', borderRadius: 9999,
+            background: bg, color, fontSize: 11, fontWeight: 600,
+            fontFamily: 'IBM Plex Mono', letterSpacing: '0.03em',
+          }}>
+            {v}
           </span>
         );
-      }
-    }
+      },
+    },
   ], []);
 
   const defaultColDef = useMemo(() => ({
-    sortable: true,
-    filter: true,
-    resizable: true,
-    flex: 1
+    sortable: true, filter: true, resizable: true, flex: 1,
   }), []);
 
-  const handleRowClick = (event) => {
-    if (onSelectDispute && event.data) {
-      onSelectDispute(event.data);
-    }
-  };
-
   return (
-    <div className="w-full h-[360px] ag-theme-alpine">
+    <div className="w-full h-[380px] ag-theme-alpine" style={{ borderRadius: 10, overflow: 'hidden' }}>
       <AgGridReact
         rowData={disputes}
         columnDefs={columnDefs}
         defaultColDef={defaultColDef}
-        onRowClicked={handleRowClick}
+        onRowClicked={(e) => e.data && onSelectDispute && onSelectDispute(e.data)}
         rowSelection="single"
-        headerHeight={38}
-        rowHeight={40}
+        headerHeight={40}
+        rowHeight={44}
         animateRows={false}
       />
     </div>
