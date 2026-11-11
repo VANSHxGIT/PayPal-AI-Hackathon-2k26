@@ -2,69 +2,184 @@
 @tailwind components;
 @tailwind utilities;
 
+/* =========================================================
+   DisputeMind AI — Wise-Inspired Design System
+   Forest Ink × Lime Voltage × Paper Canvas
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+  --color-forest-ink:   #163300;
+  --color-lime-voltage: #9fe870;
+  --color-spruce:       #054d28;
+  --color-linen-mist:   #e2f6d5;
+  --color-charcoal:     #454745;
+  --color-obsidian:     #0e0f0c;
+  --color-pebble:       #868685;
+  --color-fog:          #e8ebe6;
+  --color-paper:        #ffffff;
+}
+
 @layer base {
   * {
-    border-color: #1E293B;
-    box-shadow: none !important;
+    box-shadow: none;
   }
-  
-  body {
-    background-color: #0B0E14;
-    color: #F1F5F9;
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    font-variant-numeric: tabular-nums;
+
+  html {
+    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: #454745;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-feature-settings: "calt";
+    font-variant-numeric: tabular-nums;
     overflow-x: hidden;
   }
 
-  /* Strictly prohibit drop shadows and text shadows across the application */
+  /* Explicit reset — no shadows, no text shadows */
   *, *::before, *::after {
-    box-shadow: none !important;
-    text-shadow: none !important;
+    box-shadow: none;
+    text-shadow: none;
   }
 }
 
-/* 3D Perspective Container for Rotating Merchant Security Card */
-.preserve-3d {
-  transform-style: preserve-3d;
-}
-
-.perspective-1000 {
-  perspective: 1000px;
-}
-
-/* Institutional AG Grid Dark Financial Terminal Styling */
+/* =====================
+   AG Grid — Wise Light Theme
+   ===================== */
 .ag-theme-alpine {
-  --ag-background-color: #0F141F;
-  --ag-header-background-color: #141B28;
-  --ag-border-color: #1E293B;
-  --ag-header-foreground-color: #CBD5E1;
-  --ag-foreground-color: #F1F5F9;
-  --ag-row-hover-color: #182232;
-  --ag-selected-row-background-color: #1E2B3E;
-  --ag-font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --ag-font-size: 13px;
-  --ag-cell-horizontal-border: solid #1E293B;
+  --ag-background-color: #ffffff;
+  --ag-header-background-color: #e8ebe6;
+  --ag-border-color: rgba(14, 15, 12, 0.12);
+  --ag-header-foreground-color: #163300;
+  --ag-foreground-color: #454745;
+  --ag-row-hover-color: #e2f6d5;
+  --ag-selected-row-background-color: #d4f0b8;
+  --ag-font-family: 'Inter', system-ui, sans-serif;
+  --ag-font-size: 14px;
+  --ag-cell-horizontal-border: solid rgba(14, 15, 12, 0.08);
   --ag-row-border-style: solid;
-  --ag-row-border-color: #1E293B;
-  --ag-header-column-separator-color: #1E293B;
-  border: 1px solid #1E293B;
-  border-radius: 2px;
+  --ag-row-border-color: rgba(14, 15, 12, 0.08);
+  --ag-header-column-separator-color: rgba(14, 15, 12, 0.12);
+  border: 1px solid rgba(14, 15, 12, 0.12);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-/* Crisp Industrial Slate Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* =====================
+   3D Card Utilities
+   ===================== */
+.preserve-3d  { transform-style: preserve-3d; }
+.perspective-800 { perspective: 800px; }
+
+/* =====================
+   Scrollbar — Wise Minimal
+   ===================== */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: #e8ebe6; }
+::-webkit-scrollbar-thumb { background: #c4c9c2; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #868685; }
+
+/* =====================
+   Display headline utility
+   ===================== */
+.text-display-wise {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 900;
+  font-size: clamp(52px, 8vw, 100px);
+  line-height: 0.88;
+  letter-spacing: -3px;
+  font-feature-settings: "calt";
 }
-::-webkit-scrollbar-track {
-  background: #0B0E14;
+
+.text-head-wise {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 900;
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 0.9;
+  letter-spacing: -2.2px;
 }
-::-webkit-scrollbar-thumb {
-  background: #222C3F;
-  border-radius: 0px;
+
+/* =====================
+   Pill Button Base
+   ===================== */
+.btn-lime {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 24px;
+  background-color: #9fe870;
+  color: #163300;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.096px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  white-space: nowrap;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+.btn-lime:hover { background-color: #8dd95e; }
+.btn-lime:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 24px;
+  background-color: #ffffff;
+  color: #163300;
+  border-radius: 9999px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.096px;
+  border: 1.5px solid #163300;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  white-space: nowrap;
+}
+.btn-outline:hover { background-color: #e2f6d5; }
+
+/* =====================
+   Pill Badge / Tag
+   ===================== */
+.badge-forest {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background-color: #163300;
+  color: #9fe870;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.badge-lime {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background-color: #e2f6d5;
+  color: #163300;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.badge-fog {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background-color: #e8ebe6;
+  color: #454745;
+  font-size: 12px;
+  font-weight: 500;
 }
