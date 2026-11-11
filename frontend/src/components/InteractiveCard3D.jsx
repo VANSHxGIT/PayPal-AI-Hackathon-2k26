@@ -53,11 +53,6 @@ export const InteractiveCard3D = ({
     >
       <div
         ref={cardRef}
-        style={{
-          transform: `rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(${tz}px)`,
-          transition: 'transform 0.14s cubic-bezier(0.2,0.8,0.2,1)',
-          transformStyle: 'preserve-3d',
-        }}
         className="relative w-full h-[240px] rounded-[28px] p-6 flex flex-col justify-between overflow-hidden cursor-crosshair"
         style={{
           transform: `rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(${tz}px)`,
