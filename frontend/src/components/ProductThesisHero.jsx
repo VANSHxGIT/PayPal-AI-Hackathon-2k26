@@ -1,124 +1,110 @@
 import React from 'react';
 import { InteractiveCard3D } from './InteractiveCard3D';
-import { RefreshIcon, ArrowRightIcon, ShieldIcon } from './Icons';
+import { RefreshIcon, ArrowRightIcon, ZapIcon, TrendingUpIcon, ShieldIcon } from './Icons';
 
 /**
- * Product Thesis Hero Component (Augustus + Overtake Inspiration)
- * Features the authoritative 3-line thesis, real-time capital ticker,
- * and the scroll-interactive 3D merchant card.
+ * Hero Section — Wise Design Language applied to DisputeMind AI
+ * Massive 900-weight display type, Forest Ink dominance, single Lime Voltage CTA.
+ * White canvas top, alternates to Fog card strip, finishes with Forest Ink dark.
  */
-export const ProductThesisHero = ({
-  totalProtected,
-  onSimulateDispute,
-  isProcessing,
-  onJumpToTerminal
-}) => {
+export const ProductThesisHero = ({ totalProtected, onSimulateDispute, isProcessing, onJumpToTerminal }) => {
+  const stats = [
+    { label: 'Mean SLA', value: '6.96s', sub: 'Automated REST' },
+    { label: 'Capital Shield', value: `$${(totalProtected / 1000).toFixed(0)}k`, sub: 'Under active guard' },
+    { label: 'Win Ratio', value: '98.5%', sub: 'Chapter 11 eligible' },
+    { label: 'Hours Saved', value: '36.5h', sub: 'Per 50 disputes' },
+  ];
+
   return (
-    <section id="thesis" className="border-b border-borderline py-12 md:py-16">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        
-        {/* Left Column: Authoritative 3-Line Thesis (Augustus Style) (7 cols) */}
-        <div className="lg:col-span-7 space-y-6">
-          
-          {/* Institutional Badge */}
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-surface-card border border-borderline text-[11px] font-mono text-ink-muted rounded-[1px]">
-            <span className="w-1.5 h-1.5 bg-accent inline-block" />
-            <span className="font-semibold text-ink">PAYPAL AND AI HACKATHON</span>
-            <span className="text-borderline-light">/</span>
-            <span>AUTONOMOUS AGENT SPECIFICATION</span>
-          </div>
+    <>
+      {/* ---- Hero: White canvas ---- */}
+      <section className="pt-24 pb-16 px-6 md:px-8 max-w-page mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
-          {/* The 3-Line Core Thesis */}
-          <div className="space-y-4">
-            <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-bold text-ink leading-tight tracking-tight">
-              PayPal chargebacks drain merchant margins through manual friction and missed deadlines.
-            </h1>
-            
-            <p className="font-display text-base sm:text-lg text-ink-secondary leading-relaxed font-normal">
-              DisputeMind AI connects to PayPal webhooks, retrieves carrier proofs of delivery via Elastic RAG, and synthesizes legal contestations with Gemini 2.0.
+          {/* Left: Display Headline Column */}
+          <div className="lg:col-span-7 space-y-8">
+            {/* Pill badge */}
+            <div className="badge-forest inline-flex">
+              PayPal and AI Hackathon 2026
+            </div>
+
+            {/* Aggressive display headline — Wise 900 weight */}
+            <div className="space-y-3">
+              <h1 className="text-obsidian font-black leading-none tracking-tight" style={{ fontSize: 'clamp(52px, 7vw, 88px)', lineHeight: 0.9, letterSpacing: '-3px', fontWeight: 900 }}>
+                Chargebacks<br />
+                <span style={{ color: '#163300' }}>defended</span><br />
+                <span style={{ color: '#9fe870', WebkitTextStroke: '2px #163300' }}>autonomously.</span>
+              </h1>
+            </div>
+
+            {/* Sub-headline: 25px Inter, Charcoal, balanced */}
+            <p className="text-charcoal" style={{ fontSize: 20, lineHeight: 1.5, letterSpacing: '-0.2px', maxWidth: 540 }}>
+              DisputeMind connects to PayPal webhooks, retrieves carrier delivery proofs via Elastic,
+              and synthesizes legal contestations with Gemini 2.0 — in under 7 seconds.
             </p>
 
-            <p className="font-mono text-sm sm:text-base text-accent-emerald font-medium tracking-tight">
-              Sub-7-second autonomous submission. 98.5% capital recovery rate. Zero human intervention required.
+            {/* Proof statement — Forest Ink, weight 700 */}
+            <p className="font-bold" style={{ fontSize: 16, color: '#054d28', letterSpacing: '-0.1px' }}>
+              Sub-7-second autonomous submission. 98.5% capital recovery rate. Zero human effort.
             </p>
+
+            {/* CTAs: filled lime pill + text link */}
+            <div className="flex flex-wrap items-center gap-5">
+              <button onClick={onSimulateDispute} disabled={isProcessing} className="btn-lime text-base">
+                <RefreshIcon className={`w-4 h-4 ${isProcessing ? 'animate-spin' : ''}`} />
+                {isProcessing ? 'Simulating...' : 'Simulate Dispute'}
+              </button>
+              <button
+                onClick={onJumpToTerminal}
+                className="text-forest-ink font-semibold underline underline-offset-2"
+                style={{ fontSize: 16, background: 'none', border: 'none', cursor: 'pointer' }}
+              >
+                See live terminal
+              </button>
+            </div>
           </div>
 
-          {/* Action CTAs */}
-          <div className="flex flex-wrap items-center gap-4 pt-2">
-            <button
-              onClick={onSimulateDispute}
-              disabled={isProcessing}
-              className="px-5 py-2.5 bg-accent text-white font-mono text-xs font-semibold hover:bg-accent-navy disabled:opacity-50 border border-accent/40 rounded-[2px] flex items-center gap-2 transition-colors"
+          {/* Right: Scroll-rotating 3D Security Card */}
+          <div className="lg:col-span-5 flex flex-col items-center gap-4">
+            <div className="text-pebble font-medium flex justify-between w-full max-w-[440px]" style={{ fontSize: 12 }}>
+              <span>Merchant Security Token — tilt to interact</span>
+              <span>SANDBOX ACTIVE</span>
+            </div>
+            <InteractiveCard3D
+              merchantName="Apex Global Fulfillment"
+              merchantId="MERC-DEFAULT-001"
+              protectedVolume={`$${totalProtected.toLocaleString('en-US', { minimumFractionDigits: 2 })}`}
+              activePhase={isProcessing ? 'SYNTHESIZING' : 'MONITORING'}
+            />
+            {/* PayPal gateway status strip */}
+            <div
+              className="w-full max-w-[440px] rounded-full px-5 py-2.5 flex items-center justify-between font-mono"
+              style={{ background: '#e2f6d5', fontSize: 12 }}
             >
-              <RefreshIcon className={`w-3.5 h-3.5 ${isProcessing ? 'animate-spin' : ''}`} />
-              {isProcessing ? "SIMULATING DISPUTE..." : "SIMULATE INBOUND DISPUTE"}
-            </button>
-
-            <button
-              onClick={onJumpToTerminal}
-              className="px-5 py-2.5 bg-surface-card text-ink-secondary hover:text-ink font-mono text-xs font-medium border border-borderline rounded-[2px] flex items-center gap-2 transition-colors"
-            >
-              <span>INSPECT LIVE TERMINAL</span>
-              <ArrowRightIcon className="w-3.5 h-3.5" />
-            </button>
-          </div>
-
-          {/* High-Impact Proof Metrics Ticker (Overtake Style) */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-borderline font-mono">
-            <div className="bg-surface-card border border-borderline p-3 rounded-[1px]">
-              <span className="text-[10px] text-ink-muted uppercase block">Mean SLA</span>
-              <span className="text-lg font-bold text-ink">6.96 SEC</span>
-              <span className="text-[10px] text-accent-emerald block mt-0.5">Automated REST</span>
+              <span className="text-forest-ink">api-m.sandbox.paypal.com</span>
+              <div className="flex items-center gap-1.5">
+                <div className="w-2 h-2 rounded-full bg-spruce" />
+                <span className="font-semibold text-spruce">ONLINE</span>
+              </div>
             </div>
-
-            <div className="bg-surface-card border border-borderline p-3 rounded-[1px]">
-              <span className="text-[10px] text-ink-muted uppercase block">Capital Shield</span>
-              <span className="text-lg font-bold text-ink">
-                ${(totalProtected / 1000).toFixed(1)}k USD
-              </span>
-              <span className="text-[10px] text-accent block mt-0.5">Active Monitored</span>
-            </div>
-
-            <div className="bg-surface-card border border-borderline p-3 rounded-[1px]">
-              <span className="text-[10px] text-ink-muted uppercase block">Win Ratio</span>
-              <span className="text-lg font-bold text-accent-emerald">98.5%</span>
-              <span className="text-[10px] text-ink-muted block mt-0.5">Chapter 11 Match</span>
-            </div>
-
-            <div className="bg-surface-card border border-borderline p-3 rounded-[1px]">
-              <span className="text-[10px] text-ink-muted uppercase block">Labor Saved</span>
-              <span className="text-lg font-bold text-ink">36.5 HRS</span>
-              <span className="text-[10px] text-accent-emerald block mt-0.5">Per 50 Disputes</span>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Right Column: Dynamic Scroll-Rotating 3D Card (5 cols) */}
-        <div className="lg:col-span-5 flex flex-col items-center justify-center p-4">
-          <div className="w-full flex items-center justify-between pb-2 mb-4 text-ink-muted font-mono text-[10px] uppercase border-b border-borderline">
-            <span className="flex items-center gap-1.5">
-              <ShieldIcon className="w-3 h-3 text-accent" />
-              Autonomous Merchant Security Token
-            </span>
-            <span>SCROLL & TILT ENABLED</span>
-          </div>
-
-          <InteractiveCard3D
-            merchantName="Apex Global Fulfillment"
-            merchantId="MERC-DEFAULT-001"
-            protectedVolume={`$${totalProtected.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
-            activePhase={isProcessing ? "SYNTHESIZING CONTESTATION" : "AUTONOMOUS MONITORING"}
-          />
-
-          <div className="w-full mt-4 p-3 bg-surface-card border border-borderline text-[11px] font-mono text-ink-muted flex items-center justify-between rounded-[1px]">
-            <span>SANDBOX GATEWAY: api-m.sandbox.paypal.com</span>
-            <span className="text-accent-emerald font-semibold">ONLINE</span>
           </div>
         </div>
+      </section>
 
-      </div>
-    </section>
+      {/* ---- Stats Band: Fog surface ---- */}
+      <section style={{ background: '#e8ebe6' }}>
+        <div className="max-w-page mx-auto px-6 md:px-8 py-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px" style={{ background: 'rgba(14,15,12,0.1)', borderRadius: 16, overflow: 'hidden' }}>
+            {stats.map((s, i) => (
+              <div key={i} className="flex flex-col gap-1 px-8 py-6" style={{ background: '#f0f4ee' }}>
+                <span className="text-pebble font-medium uppercase tracking-wide" style={{ fontSize: 11 }}>{s.label}</span>
+                <span className="font-black text-obsidian" style={{ fontSize: 36, letterSpacing: '-1.5px', lineHeight: 1 }}>{s.value}</span>
+                <span className="font-medium" style={{ fontSize: 13, color: '#054d28' }}>{s.sub}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
-
