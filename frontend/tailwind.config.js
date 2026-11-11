@@ -7,59 +7,54 @@ export default {
   theme: {
     extend: {
       colors: {
-        canvas: {
-          DEFAULT: '#0B0E14',
-          subtle: '#10141D',
-          deep: '#080A0F',
-          card: '#131924'
-        },
-        surface: {
-          base: '#0F141F',
-          card: '#141B28',
-          elevated: '#1A2333',
-          border: '#222C3F',
-          light: '#F8FAFC',
-          lightsubtle: '#EDF2F7',
-          lightborder: '#CBD5E1'
-        },
-        ink: {
-          DEFAULT: '#F1F5F9',
-          secondary: '#CBD5E1',
-          muted: '#8A99AD',
-          faint: '#4E5D73'
-        },
-        accent: {
-          DEFAULT: '#3B82F6',
-          navy: '#1E3A8A',
-          steel: '#4A628A',
-          emerald: '#10B981',
-          amber: '#F59E0B',
-          cyan: '#0284C7'
-        },
-        borderline: {
-          DEFAULT: '#1E293B',
-          light: '#334155',
-          dark: '#131B27',
-          subtle: '#192231'
-        }
+        /* Wise-inspired: Forest Ink as dominant brand dark */
+        'forest-ink':   '#163300',
+        'spruce':       '#054d28',
+        'lime-voltage': '#9fe870',
+        'linen-mist':   '#e2f6d5',
+        'signal-blue':  '#0b4c72',
+        'alarm-red':    '#cb272f',
+        'charcoal':     '#454745',
+        'obsidian':     '#0e0f0c',
+        'pebble':       '#868685',
+        'slate':        '#6a6c6a',
+        'fog':          '#e8ebe6',
+        'paper':        '#ffffff',
       },
       fontFamily: {
-        display: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
-        serif: ['"Cinzel"', 'Georgia', 'serif'],
-        mono: ['"IBM Plex Mono"', '"JetBrains Mono"', 'ui-monospace', 'monospace']
+        display: ['"Inter"', 'system-ui', '-apple-system', 'sans-serif'],
+        body:    ['"Inter"', 'system-ui', '-apple-system', 'sans-serif'],
+        mono:    ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
+      },
+      fontSize: {
+        micro:      ['12px', { lineHeight: '1.63', letterSpacing: '-0.036px' }],
+        caption:    ['14px', { lineHeight: '1.55', letterSpacing: '-0.07px'  }],
+        'body-sm':  ['16px', { lineHeight: '1.5',  letterSpacing: '-0.096px' }],
+        body:       ['18px', { lineHeight: '1.5',  letterSpacing: '-0.126px' }],
+        'body-lg':  ['25px', { lineHeight: '1.3',  letterSpacing: '-0.225px' }],
+        subheading: ['36px', { lineHeight: '1.25', letterSpacing: '-0.396px' }],
+        'head-sm':  ['45px', { lineHeight: '1.1',  letterSpacing: '-0.495px' }],
+        head:       ['61px', { lineHeight: '1.1',  letterSpacing: '-0.915px' }],
+        'head-lg':  ['80px', { lineHeight: '0.9',  letterSpacing: '-2.4px'   }],
+        display:    ['100px',{ lineHeight: '0.88', letterSpacing: '-3px'     }],
       },
       borderRadius: {
-        none: '0px',
-        xs: '1px',
-        sm: '2px',
-        DEFAULT: '2px',
-        md: '2px',
-        lg: '3px',
-        xl: '4px'
+        full:  '9999px',
+        image: '1000px',
+        card:  '10px',
+        'card-lg': '28px',
+        input: '10px',
+        badge: '9999px',
       },
       boxShadow: {
-        none: 'none'
-      }
+        subtle:   'rgba(14,15,12,0.12) 0px 0px 0px 1px',
+        'subtle-2': 'rgb(134,134,133) 0px 0px 0px 1px inset',
+        xl:   'rgba(0,0,0,0.15) 0px 10px 32px 0px, rgba(0,0,0,0.04) 0px 40px 40px 0px',
+        lg:   'rgba(0,0,0,0.08) 0px 6px 20px 0px',
+      },
+      maxWidth: {
+        page: '1200px',
+      },
     },
   },
   plugins: [],
