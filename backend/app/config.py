@@ -21,12 +21,12 @@ class Settings(BaseSettings):
     HOST: str = Field(default="0.0.0.0")
     PORT: int = Field(default=8000)
     CORS_ORIGINS: List[str] = Field(
-        default=["http://localhost:5173", "http://localhost:3000", "https://disputemind.onrender.com"]
+        default=["http://localhost:5173", "http://localhost:3000", "https://Evidentia.onrender.com"]
     )
 
     # Security & JWT Tokens (Item 1, 4, 8, 9)
     JWT_SECRET_KEY: str = Field(
-        default="disputemind_dev_secret_key_change_in_production_32bytes_min",
+        default="Evidentia_dev_secret_key_change_in_production_32bytes_min",
         description="Cryptographic secret key for signing JWT tokens"
     )
     JWT_ALGORITHM: str = Field(default="HS256")
@@ -38,7 +38,7 @@ class Settings(BaseSettings):
     RATE_LIMIT_GLOBAL_PER_MINUTE: int = Field(default=60)
 
     # Database & Automated Backups (Item 10 & 11)
-    DATABASE_URL: str = Field(default="sqlite:///./disputemind.db")
+    DATABASE_URL: str = Field(default="sqlite:///./Evidentia.db")
     BACKUP_DIR: str = Field(default="./backups")
     BACKUP_RETENTION_DAYS: int = Field(default=7)
 
@@ -55,7 +55,7 @@ class Settings(BaseSettings):
     # Elastic Search (Sponsor Tool)
     ELASTICSEARCH_URL: str = Field(default="http://localhost:9200")
     ELASTICSEARCH_API_KEY: str = Field(default="")
-    ELASTICSEARCH_INDEX_PREFIX: str = Field(default="disputemind_")
+    ELASTICSEARCH_INDEX_PREFIX: str = Field(default="Evidentia_")
 
     @property
     def is_production(self) -> bool:

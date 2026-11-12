@@ -11,7 +11,7 @@ from app.services.gemini_service import gemini_service
 from app.services.paypal_client import paypal_client
 from app.core.logger import broadcaster
 
-logger = logging.getLogger("disputemind.orchestrator")
+logger = logging.getLogger("Evidentia.orchestrator")
 
 
 class DisputeOrchestrator:

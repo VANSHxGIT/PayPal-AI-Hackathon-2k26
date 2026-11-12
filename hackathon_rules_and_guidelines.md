@@ -1,6 +1,6 @@
 # Hackathon Compliance Rules
 
-To ensure DisputeMind AI is eligible for the $69,750 prize pool, all development must strictly adhere to the following checklist:
+To ensure Evidentia is eligible for the $69,750 prize pool, all development must strictly adhere to the following checklist:
 
 ## 1. Mandatory Technical Integrations
 - [ ] Meaningful use of a PayPal API (Disputes API & Webhooks).

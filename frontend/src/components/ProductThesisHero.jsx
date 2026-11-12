@@ -3,7 +3,7 @@ import { InteractiveCard3D } from './InteractiveCard3D';
 import { RefreshIcon, ArrowRightIcon, ZapIcon, TrendingUpIcon, ShieldIcon } from './Icons';
 
 /**
- * Hero Section — Wise Design Language applied to DisputeMind AI
+ * Hero Section — Wise Design Language applied to Evidentia
  * Massive 900-weight display type, Forest Ink dominance, single Lime Voltage CTA.
  * White canvas top, alternates to Fog card strip, finishes with Forest Ink dark.
  */
@@ -39,7 +39,7 @@ export const ProductThesisHero = ({ totalProtected, onSimulateDispute, isProcess
 
             {/* Sub-headline: 25px Inter, Charcoal, balanced */}
             <p className="text-charcoal" style={{ fontSize: 20, lineHeight: 1.5, letterSpacing: '-0.2px', maxWidth: 540 }}>
-              DisputeMind connects to PayPal webhooks, retrieves carrier delivery proofs via Elastic,
+              Evidentia connects to PayPal webhooks, retrieves carrier delivery proofs via Elastic,
               and synthesizes legal contestations with Gemini 2.0 — in under 7 seconds.
             </p>
 

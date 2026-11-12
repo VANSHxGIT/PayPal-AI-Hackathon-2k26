@@ -1,5 +1,5 @@
 """
-DisputeMind AI — Root Package Proxy
+Evidentia — Root Package Proxy
 Enables seamless execution of 'uvicorn app.main:app' from the repository root
 by dynamically extending the package search path to 'backend/app'.
 """

@@ -1,5 +1,5 @@
 # ==============================================================================
-# DisputeMind AI — Modern, Audited & Secure Dependencies (Item 13)
+# Evidentia — Modern, Audited & Secure Dependencies (Item 13)
 # ==============================================================================
 
 # Core Framework & Server

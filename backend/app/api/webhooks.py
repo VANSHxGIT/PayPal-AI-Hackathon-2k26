@@ -7,7 +7,7 @@ from app.core.rate_limiter import limiter
 from app.config import settings
 
 router = APIRouter(prefix="/api/webhooks", tags=["PayPal Webhooks"])
-logger = logging.getLogger("disputemind.webhook")
+logger = logging.getLogger("Evidentia.webhook")
 
 
 def background_process_dispute(

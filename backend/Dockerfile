@@ -1,5 +1,5 @@
 # ==============================================================================
-# DisputeMind AI — Hardened Production Dockerfile
+# Evidentia — Hardened Production Dockerfile
 # ==============================================================================
 
 FROM python:3.11-slim
@@ -25,15 +25,15 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Create non-root user for security (Least Privilege Principle)
-RUN useradd -m -u 1000 disputemind && \
+RUN useradd -m -u 1000 Evidentia && \
     mkdir -p /app/backups && \
-    chown -R disputemind:disputemind /app
+    chown -R Evidentia:Evidentia /app
 
 # Copy application source
-COPY --chown=disputemind:disputemind . .
+COPY --chown=Evidentia:Evidentia . .
 
 # Switch to non-root user
-USER disputemind
+USER Evidentia
 
 EXPOSE 8000
 

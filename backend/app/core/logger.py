@@ -4,7 +4,7 @@ import logging
 from datetime import datetime, timezone
 from typing import Set
 
-logger = logging.getLogger("disputemind")
+logger = logging.getLogger("Evidentia")
 
 
 class LiveLogBroadcaster:

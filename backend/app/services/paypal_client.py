@@ -4,7 +4,7 @@ import logging
 from typing import Dict, Any, Optional
 from app.config import settings
 
-logger = logging.getLogger("disputemind.paypal")
+logger = logging.getLogger("Evidentia.paypal")
 
 
 class PayPalClient:

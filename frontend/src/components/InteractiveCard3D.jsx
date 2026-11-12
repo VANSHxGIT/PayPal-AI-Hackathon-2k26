@@ -75,7 +75,7 @@ export const InteractiveCard3D = ({
         <div className="flex items-center justify-between relative z-10" style={{ transform: 'translateZ(20px)' }}>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-lime-voltage" />
-            <span className="text-lime-voltage font-black text-sm tracking-tight uppercase">DisputeMind</span>
+            <span className="text-lime-voltage font-black text-sm tracking-tight uppercase">Evidentia</span>
           </div>
           <span className="text-xs font-mono px-3 py-1 rounded-full text-lime-voltage/70 border border-lime-voltage/30" style={{ fontSize: 11 }}>
             PAYPAL SANDBOX

@@ -1,5 +1,5 @@
 """
-DisputeMind AI — Automated 16-Point Security Verification Runner
+Evidentia — Automated 16-Point Security Verification Runner
 Executes comprehensive programmatic checks for all 16 security constraints.
 """
 
@@ -243,7 +243,7 @@ def run_full_security_audit():
     ]
 
     print("\n" + "=" * 78)
-    print("🛡️  DISPUTEMIND AI — 16-POINT BACKEND SECURITY VERIFICATION AUDIT")
+    print("🛡️  Evidentia — 16-POINT BACKEND SECURITY VERIFICATION AUDIT")
     print("=" * 78 + "\n")
 
     passed_count = 0

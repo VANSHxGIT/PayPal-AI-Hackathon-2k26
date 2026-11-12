@@ -30,7 +30,7 @@ logging.basicConfig(
     level=logging.INFO if settings.DEBUG else logging.WARNING,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
 )
-logger = logging.getLogger("disputemind")
+logger = logging.getLogger("Evidentia")
 
 
 def seed_initial_demo_users():
@@ -41,15 +41,15 @@ def seed_initial_demo_users():
         admin = db.query(User).filter(User.role == "admin").first()
         if not admin:
             admin_user = User(
-                email="admin@disputemind.ai",
+                email="admin@Evidentia.ai",
                 hashed_password=hash_password("AdminSecurePass2026!"),  # Item 9: Salted Hash
                 merchant_id="MERC-ADMIN-GLOBAL",
-                company_name="DisputeMind Global Operations",
+                company_name="Evidentia Global Operations",
                 role="admin",
                 is_active=True
             )
             db.add(admin_user)
-            logger.info("[INIT] Seeded default secure administrator account: admin@disputemind.ai")
+            logger.info("[INIT] Seeded default secure administrator account: admin@Evidentia.ai")
 
         # Check if demo merchant exists
         merchant = db.query(User).filter(User.email == "merchant@shop.com").first()
@@ -76,7 +76,7 @@ def seed_initial_demo_users():
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup Sequence
-    logger.info("Initializing DisputeMind AI Backend...")
+    logger.info("Initializing Evidentia Backend...")
     init_db()  # Item 10: Lock database & create tables
     seed_initial_demo_users()  # Seed demo accounts with salted hashes
     
@@ -88,12 +88,12 @@ async def lifespan(app: FastAPI):
 
     # Shutdown Sequence
     scheduler_task.cancel()
-    logger.info("DisputeMind AI Backend shutdown complete.")
+    logger.info("Evidentia Backend shutdown complete.")
 
 
 # Item 12: Disable debug mode in production (hides docs_url, redoc_url, and openapi_url if not in debug)
 app = FastAPI(
-    title="DisputeMind AI API",
+    title="Evidentia API",
     description="Autonomous Chargeback & Dispute Defense Agent for PayPal Merchants",
     version="1.0.0",
     docs_url=settings.docs_url,
@@ -134,7 +134,7 @@ async def health_check():
     """Sanitized health check endpoint revealing zero sensitive keys."""
     return {
         "status": "healthy",
-        "service": "DisputeMind AI Core",
+        "service": "Evidentia Core",
         "version": "1.0.0",
         "environment": settings.ENVIRONMENT,
         "debug_mode": settings.DEBUG,

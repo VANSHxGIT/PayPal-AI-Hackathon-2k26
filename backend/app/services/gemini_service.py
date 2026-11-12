@@ -3,7 +3,7 @@ import logging
 from typing import Dict, Any, Optional
 from app.config import settings
 
-logger = logging.getLogger("disputemind.gemini")
+logger = logging.getLogger("Evidentia.gemini")
 
 
 class GeminiService:
@@ -45,7 +45,7 @@ class GeminiService:
                 model = genai.GenerativeModel(self.model_name)
 
                 prompt = f"""
-You are DisputeMind AI, an elite autonomous legal defense agent for PayPal e-commerce merchants.
+You are Evidentia, an elite autonomous legal defense agent for PayPal e-commerce merchants.
 Your role is to formulate a compelling, objective, and definitive defense against a PayPal chargeback claim based on verifiable merchant evidence.
 
 ### DISPUTE INFORMATION:

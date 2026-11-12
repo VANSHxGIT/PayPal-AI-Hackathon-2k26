@@ -2,7 +2,7 @@ import logging
 from typing import Dict, Any, Optional
 from app.config import settings
 
-logger = logging.getLogger("disputemind.elastic")
+logger = logging.getLogger("Evidentia.elastic")
 
 
 class ElasticService:

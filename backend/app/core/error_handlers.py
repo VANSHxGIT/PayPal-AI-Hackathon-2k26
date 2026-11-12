@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-logger = logging.getLogger("disputemind.security")
+logger = logging.getLogger("Evidentia.security")
 
 
 async def unhandled_exception_handler(request: Request, exc: Exception) -> JSONResponse:

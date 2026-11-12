@@ -1,5 +1,5 @@
 /**
- * DisputeMind AI — Automated 16-Point Security Verification Runner (Node.js Engine)
+ * Evidentia — Automated 16-Point Security Verification Runner (Node.js Engine)
  * Directly verifies code integrity, security rules, encryption, and configurations.
  */
 
@@ -223,7 +223,7 @@ check(16, "Full Security Check", () => {
 
 // Output formatted summary
 console.log("\n" + "=".repeat(80));
-console.log("🛡️  DISPUTEMIND AI — 16-POINT BACKEND SECURITY VERIFICATION AUDIT");
+console.log("🛡️  Evidentia — 16-POINT BACKEND SECURITY VERIFICATION AUDIT");
 console.log("=".repeat(80) + "\n");
 
 let passedCount = 0;

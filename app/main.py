@@ -1,5 +1,5 @@
 """
-DisputeMind AI — Root App Main Proxy
+Evidentia — Root App Main Proxy
 Delegates directly to backend.app.main:app
 """
 import os

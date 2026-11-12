@@ -1,2 +1,2 @@
-# DisputeMind AI Application Package
+# Evidentia Application Package
 

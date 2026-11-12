@@ -1,10 +1,10 @@
 # ==============================================================================
-# DisputeMind AI — Render Blueprint Specification (Sponsor Tool)
+# Evidentia — Render Blueprint Specification (Sponsor Tool)
 # ==============================================================================
 
 services:
   - type: web
-    name: disputemind-api
+    name: Evidentia-api
     runtime: python
     rootDir: backend
     buildCommand: "pip install -r requirements.txt"
@@ -33,7 +33,7 @@ services:
       - key: ACCESS_TOKEN_EXPIRE_MINUTES
         value: "60"
       - key: DATABASE_URL
-        value: "sqlite:///./disputemind.db"
+        value: "sqlite:///./Evidentia.db"
       - key: BACKUP_DIR
         value: "./backups"
       - key: BACKUP_RETENTION_DAYS

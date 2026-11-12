@@ -23,7 +23,7 @@ export const TermsOfServiceModal = ({ isOpen, onClose }) => {
           <div>
             <h4 className="font-semibold text-ink uppercase text-[11px] mb-1">1. Scope of Service</h4>
             <p>
-              DisputeMind AI provides automated dispute defense representation and evidence assembly software for PayPal merchants. 
+              Evidentia provides automated dispute defense representation and evidence assembly software for PayPal merchants. 
               The software interfaces with the PayPal Disputes REST API to transmit evidence compiled from the merchant's authorized records.
             </p>
           </div>
@@ -31,7 +31,7 @@ export const TermsOfServiceModal = ({ isOpen, onClose }) => {
           <div>
             <h4 className="font-semibold text-ink uppercase text-[11px] mb-1">2. Merchant Authorization</h4>
             <p>
-              By configuring PayPal Sandbox or production credentials, the merchant authorizes DisputeMind AI to read dispute notices 
+              By configuring PayPal Sandbox or production credentials, the merchant authorizes Evidentia to read dispute notices 
               and submit evidence packages under PayPal Merchant Protection guidelines on behalf of the registered entity.
             </p>
           </div>
@@ -40,7 +40,7 @@ export const TermsOfServiceModal = ({ isOpen, onClose }) => {
             <h4 className="font-semibold text-ink uppercase text-[11px] mb-1">3. Accuracy of Retained Evidence</h4>
             <p>
               The merchant is solely responsible for maintaining truthful, accurate shipping telemetry, delivery signatures, and customer communication archives. 
-              DisputeMind AI does not fabricate records and operates strictly on factual data retrieved from integrated merchant datastores.
+              Evidentia does not fabricate records and operates strictly on factual data retrieved from integrated merchant datastores.
             </p>
           </div>
 
@@ -48,7 +48,7 @@ export const TermsOfServiceModal = ({ isOpen, onClose }) => {
             <h4 className="font-semibold text-ink uppercase text-[11px] mb-1">4. Adjudication Outcomes</h4>
             <p>
               Final chargeback decisions rest solely with PayPal and the relevant card-issuing financial institutions. 
-              DisputeMind AI automates legal defense preparation but does not guarantee the outcome of contested chargebacks.
+              Evidentia automates legal defense preparation but does not guarantee the outcome of contested chargebacks.
             </p>
           </div>
         </div>
@@ -88,7 +88,7 @@ export const PrivacyPolicyModal = ({ isOpen, onClose }) => {
           <div>
             <h4 className="font-semibold text-ink uppercase text-[11px] mb-1">1. Data Minimization</h4>
             <p>
-              DisputeMind AI processes only the transaction identifier, dispute reason, tracking number, carrier delivery status, 
+              Evidentia processes only the transaction identifier, dispute reason, tracking number, carrier delivery status, 
               and relevant customer support transcripts strictly required to substantiate PayPal Merchant Protection eligibility.
             </p>
           </div>
@@ -159,7 +159,7 @@ export const AboutUsModal = ({ isOpen, onClose }) => {
           <div>
             <h4 className="font-semibold text-ink uppercase text-[11px] mb-1">The Autonomous Defense Sequence</h4>
             <p>
-              DisputeMind AI replaces manual investigation with an event-driven RAG architecture:
+              Evidentia replaces manual investigation with an event-driven RAG architecture:
             </p>
             <div className="bg-[#141B28] p-3 border border-[#1E293B] space-y-1.5 my-2">
               <div>1. PayPal fires CUSTOMER.DISPUTE.CREATED webhook to the FastAPI backend.</div>

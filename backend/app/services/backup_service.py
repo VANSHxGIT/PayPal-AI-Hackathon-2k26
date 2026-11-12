@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from typing import List, Dict, Any
 from app.config import settings
 
-logger = logging.getLogger("disputemind.backup")
+logger = logging.getLogger("Evidentia.backup")
 
 
 class BackupService:
@@ -24,7 +24,7 @@ class BackupService:
     def _get_sqlite_source_path(self) -> str:
         if settings.DATABASE_URL.startswith("sqlite:///"):
             return settings.DATABASE_URL.replace("sqlite:///", "")
-        return "disputemind.db"
+        return "Evidentia.db"
 
     def create_backup(self) -> Dict[str, Any]:
         """
@@ -37,7 +37,7 @@ class BackupService:
             return {"success": False, "message": "Source database file does not exist yet."}
 
         timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
-        backup_filename = f"disputemind_backup_{timestamp}.db"
+        backup_filename = f"Evidentia_backup_{timestamp}.db"
         backup_path = os.path.join(self.backup_dir, backup_filename)
 
         try:
@@ -82,7 +82,7 @@ class BackupService:
         cutoff_time = time.time() - (self.retention_days * 86400)
         pruned = 0
 
-        pattern = os.path.join(self.backup_dir, "disputemind_backup_*.db")
+        pattern = os.path.join(self.backup_dir, "Evidentia_backup_*.db")
         for filepath in glob.glob(pattern):
             try:
                 if os.path.getmtime(filepath) < cutoff_time:
@@ -96,7 +96,7 @@ class BackupService:
 
     def list_backups(self) -> List[Dict[str, Any]]:
         """List all available backup snapshots with size and modification date."""
-        pattern = os.path.join(self.backup_dir, "disputemind_backup_*.db")
+        pattern = os.path.join(self.backup_dir, "Evidentia_backup_*.db")
         results = []
         for filepath in sorted(glob.glob(pattern), reverse=True):
             stat = os.stat(filepath)

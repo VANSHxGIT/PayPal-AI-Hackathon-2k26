@@ -1,10 +1,10 @@
 # Product Requirements Document (PRD)
-**Project Name:** DisputeMind AI
+**Project Name:** Evidentia
 **Hackathon:** Build What's Next with PayPal and AI
 **Deadline:** October 31st
 
 ## 1. Vision and Purpose
-DisputeMind AI is an autonomous, agentic defense system for PayPal merchants. It transforms the highly manual, time-consuming process of fighting chargebacks and disputes into a zero-click background operation using PayPal APIs and Generative AI.
+Evidentia is an autonomous, agentic defense system for PayPal merchants. It transforms the highly manual, time-consuming process of fighting chargebacks and disputes into a zero-click background operation using PayPal APIs and Generative AI.
 
 ## 2. Target Audience
 *   Small to medium e-commerce businesses using PayPal.
@@ -14,7 +14,7 @@ DisputeMind AI is an autonomous, agentic defense system for PayPal merchants. It
 Friendly fraud and chargebacks cost merchants billions annually. To fight a dispute, merchants must manually log into their dashboard, interpret the reason code, hunt down shipping proofs, export customer chat logs, format a coherent response, and submit it before a deadline. This manual overhead often results in merchants surrendering revenue simply because the defense process is too costly.
 
 ## 4. Proposed Solution
-DisputeMind AI listens for PayPal dispute webhooks, automatically queries merchant databases (simulated via Elastic) for contextual evidence, synthesizes a compelling defense narrative using an LLM, and submits the formatted evidence package via the PayPal Disputes API—all within seconds.
+Evidentia listens for PayPal dispute webhooks, automatically queries merchant databases (simulated via Elastic) for contextual evidence, synthesizes a compelling defense narrative using an LLM, and submits the formatted evidence package via the PayPal Disputes API—all within seconds.
 
 ## 5. Hackathon Criteria Alignment
 *   **Technological Implementation:** Showcases deep integration with PayPal Webhooks and the Disputes REST API, paired with an advanced RAG (Retrieval-Augmented Generation) pipeline.

@@ -1,5 +1,5 @@
 """
-DisputeMind AI — Root Entrypoint for Cloud Deployments (Render / Docker / Heroku)
+Evidentia — Root Entrypoint for Cloud Deployments (Render / Docker / Heroku)
 Allows uvicorn to start the application directly from the repository root
 (e.g., 'uvicorn main:app' or 'python -m uvicorn main:app').
 """

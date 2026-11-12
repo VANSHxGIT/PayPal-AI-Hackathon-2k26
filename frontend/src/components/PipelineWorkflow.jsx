@@ -15,7 +15,7 @@ export const PipelineWorkflow = () => {
       stack: 'FastAPI + PayPal Webhook Gateway',
       latency: '100ms',
       challenge: 'When a customer opens a chargeback, a 10-day dispute timer begins immediately. Traditional merchant teams take 48 to 72 hours just to discover and triage inbound chargebacks from internal ticketing queues.',
-      solution: 'DisputeMind registers directly with the PayPal Developer Webhook bus. Inbound CUSTOMER.DISPUTE.CREATED payloads are cryptographically verified via SHA256 signatures and instantly ingested into the state machine.',
+      solution: 'Evidentia registers directly with the PayPal Developer Webhook bus. Inbound CUSTOMER.DISPUTE.CREATED payloads are cryptographically verified via SHA256 signatures and instantly ingested into the state machine.',
       safeguard: 'Idempotent event processing prevents replay attacks and race conditions.',
     },
     {
@@ -106,7 +106,7 @@ export const PipelineWorkflow = () => {
                   <p className="text-charcoal leading-relaxed" style={{ fontSize: 14 }}>{s.challenge}</p>
                 </div>
                 <div style={{ borderTop: '1px solid rgba(14,15,12,0.08)', paddingTop: 16 }}>
-                  <div className="font-semibold uppercase tracking-wide mb-2" style={{ fontSize: 11, color: '#054d28' }}>DisputeMind Autonomous Action</div>
+                  <div className="font-semibold uppercase tracking-wide mb-2" style={{ fontSize: 11, color: '#054d28' }}>Evidentia Autonomous Action</div>
                   <p className="text-obsidian font-medium leading-relaxed" style={{ fontSize: 14 }}>{s.solution}</p>
                 </div>
                 <div

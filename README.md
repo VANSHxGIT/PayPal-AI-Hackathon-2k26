@@ -1,4 +1,4 @@
-# ⚖️ DisputeMind AI — Autonomous Chargeback & Dispute Defense Agent
+# ⚖️ Evidentia — Autonomous Chargeback & Dispute Defense Agent
 
 > **Built for the "Build What's Next with PayPal and AI" Hackathon**  
 > *Transforming PayPal dispute defense from hours of manual labor into an autonomous, 10-second background operation.*
@@ -37,8 +37,8 @@ Chargebacks and payment disputes are one of the most painful, expensive operatio
 * **Economic Surrender:** For small and medium enterprises (SMBs)—and even high-volume enterprise sellers—gathering this evidence manually costs **\$15 to \$45 in staff labor per claim**. When faced with disputes for orders under \$100, merchants frequently **surrender the dispute without contest**, forfeiting both their product and their revenue simply because defending the claim costs more than the item is worth.
 * **Loss of Merchant Standing:** High dispute-to-transaction ratios lead to penalized processing fees, rolling reserves, or suspended merchant accounts.
 
-### The Solution: DisputeMind AI
-**DisputeMind AI** is an autonomous legal defense agent for PayPal merchants. The moment a dispute is lodged, DisputeMind AI springs into action:
+### The Solution: Evidentia
+**Evidentia** is an autonomous legal defense agent for PayPal merchants. The moment a dispute is lodged, Evidentia springs into action:
 1. It intercepts the incoming PayPal dispute webhook in real-time.
 2. It queries internal merchant databases via **Elastic** (orders, ERP systems, carrier delivery confirmations, and CRM chat logs).
 3. It passes the collected evidence and PayPal reason code to **Google Gemini**.
@@ -52,11 +52,11 @@ Chargebacks and payment disputes are one of the most painful, expensive operatio
 
 ## 💼 Practical Impacts & Real-World Business Value
 
-DisputeMind AI transforms dispute defense from a cost-prohibitive operational burden plagued by human friction and missed deadlines into a frictionless, automated competitive advantage.
+Evidentia transforms dispute defense from a cost-prohibitive operational burden plagued by human friction and missed deadlines into a frictionless, automated competitive advantage.
 
 ### 1. Quantitative Impact & Operational Benchmarks
 
-| Metric / Dimension | Traditional Manual Defense | DisputeMind AI Autonomous Engine | Practical Impact / Improvement |
+| Metric / Dimension | Traditional Manual Defense | Evidentia Autonomous Engine | Practical Impact / Improvement |
 | :--- | :--- | :--- | :--- |
 | **Response Time (MTTR)** | 3 to 14 business days | **Sub-10 seconds (< 8s avg)** | **99.9% reduction** — Eliminates risk of missed 10-day response deadlines |
 | **Operational Labor Cost** | \$20.00 – \$50.00 per claim in ops labor | **~\$0.002** in Gemini API compute | **99.99% cost reduction** — Defending claims costs fractions of a cent |
@@ -83,7 +83,7 @@ The Traditional Economic Surrender Trap (Dispute for a $45 Order):
 ------------------------------------------------------------------------------------------
 Total Cost to Defend Manually:     $72.50 to recover $45.00  --> MERCHANT SURRENDERS CLAIM
 
-With DisputeMind AI Autonomous Defense:
+With Evidentia Autonomous Defense:
   Dispute Transaction Value:       $45.00
 - Operational Labor Cost:          $0.00  (Zero staff intervention required)
 - Compute & LLM Synthesis:        $0.002 (Gemini Flash token cost)
@@ -92,13 +92,13 @@ With DisputeMind AI Autonomous Defense:
 Net Economic Outcome:              $45.00 recovered + $20 dispute fee saved for fractions of a cent!
 ```
 
-By eliminating marginal defense costs, DisputeMind AI makes **every single dispute economically viable to defend**, plugging a major source of silent margin erosion.
+By eliminating marginal defense costs, Evidentia makes **every single dispute economically viable to defend**, plugging a major source of silent margin erosion.
 
 ---
 
 ### 3. Financial ROI by Merchant Scale
 
-| Merchant Profile | Monthly Disputes | Annual Manual Cost (Labor + Losses) | Annual DisputeMind AI Cost | Net Annual Merchant Value |
+| Merchant Profile | Monthly Disputes | Annual Manual Cost (Labor + Losses) | Annual Evidentia Cost | Net Annual Merchant Value |
 | :--- | :--- | :--- | :--- | :--- |
 | **Boutique SMB** (Shopify / PayPal seller) | 50 disputes / mo | ~\$24,000 / year | ~\$1.20 in compute | **+\$23,998 net annual savings** |
 | **Mid-Market Brand** (\$10M–\$50M GMV) | 500 disputes / mo | ~\$240,000 / year | ~\$12.00 in compute | **+\$239,988 net annual savings** |
@@ -126,11 +126,11 @@ By eliminating marginal defense costs, DisputeMind AI makes **every single dispu
 
 ## 🛠️ Technologies Used
 
-DisputeMind AI is engineered with an enterprise-ready, production-grade technology stack spanning asynchronous backend services, generative AI reasoning, RAG datastores, and financial data grids:
+Evidentia is engineered with an enterprise-ready, production-grade technology stack spanning asynchronous backend services, generative AI reasoning, RAG datastores, and financial data grids:
 
 ```text
 ┌──────────────────────────────────────────────────────────────────────────────────────────┐
-│                                   DISPUTEMIND AI TECH STACK                              │
+│                                   Evidentia TECH STACK                              │
 ├──────────────────────────┬──────────────────────────┬────────────────────────────────────┤
 │    LAYER                 │ TECHNOLOGY               │ PURPOSE & ARCHITECTURAL ROLE       │
 ├──────────────────────────┼──────────────────────────┼────────────────────────────────────┤
@@ -236,7 +236,7 @@ sequenceDiagram
 
 ## 🏗️ System Architecture
 
-DisputeMind AI is engineered as an event-driven, microservice-ready system:
+Evidentia is engineered as an event-driven, microservice-ready system:
 
 ```text
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -316,7 +316,7 @@ DisputeMind AI is engineered as an event-driven, microservice-ready system:
 
 ## 🏆 Sponsor & Technology Integrations
 
-| Technology / Sponsor | Role & Implementation in DisputeMind AI |
+| Technology / Sponsor | Role & Implementation in Evidentia |
 | :--- | :--- |
 | **PayPal Sandbox APIs** | **Core Payment Platform:** Webhook listener for `CUSTOMER.DISPUTE.CREATED`, OAuth2 authentication, dispute enrichment via `GET /v1/customer/disputes/{id}`, and evidence submission via `POST /v1/customer/disputes/{id}/provide-evidence`. |
 | **Google Gemini** | **Primary AI Engine:** Evaluates dispute reason codes, analyzes shipping and customer chat records, and produces structured, schema-compliant defense statements. |
@@ -386,8 +386,8 @@ DisputeMind AI is engineered as an event-driven, microservice-ready system:
 ### Step 1: Clone Repository & Configure Environment
 
 ```bash
-git clone https://github.com/your-username/DisputeMind-AI.git
-cd DisputeMind-AI
+git clone https://github.com/your-username/Evidentia-AI.git
+cd Evidentia-AI
 ```
 
 Create a `.env` file in the `backend/` directory:

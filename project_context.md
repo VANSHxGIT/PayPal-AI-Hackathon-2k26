@@ -6,8 +6,8 @@ This project was conceived for the "Build What's Next with PayPal and AI" hackat
 ## Pivot History
 *   **Initial Idea:** "HeritageBridge" - A cultural storyteller for indigenous artisans.
 *   **Pivot Reason:** The user requested to remove the "cultural touch" and brainstorm a new idea.
-*   **Current Idea:** "DisputeMind AI" - An autonomous chargeback defense agent.
-*   **Justification:** DisputeMind AI aligns much stronger with B2B e-commerce pain points, showcases complex API orchestrations (Webhooks + Disputes API), and makes a highly compelling business case (saving time and recovering lost revenue), which maximizes the "Potential Impact" judging criteria.
+*   **Current Idea:** "Evidentia" - An autonomous chargeback defense agent.
+*   **Justification:** Evidentia aligns much stronger with B2B e-commerce pain points, showcases complex API orchestrations (Webhooks + Disputes API), and makes a highly compelling business case (saving time and recovering lost revenue), which maximizes the "Potential Impact" judging criteria.
 
 ## Core Architectural Decisions
 *   **Python/FastAPI:** Chosen for native async support, making it ideal for handling webhooks and parallel AI processing.

@@ -141,7 +141,7 @@ export default function App() {
           <div className="flex items-center gap-3">
             <div className="w-3.5 h-3.5 bg-accent" />
             <span className="font-serif text-sm tracking-widest font-bold uppercase text-ink">
-              DisputeMind
+              Evidentia
             </span>
             <span className="text-borderline-light font-mono text-xs">/</span>
             <span className="font-mono text-[11px] text-ink-muted uppercase hidden sm:inline">
@@ -279,7 +279,7 @@ export default function App() {
       <footer className="border-t border-borderline bg-canvas-subtle px-6 py-6 mt-16">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between text-xs font-mono text-ink-muted gap-4">
           <div>
-            DisputeMind AI. Autonomous Chargeback Defense Agent built for the PayPal and AI Hackathon.
+            Evidentia. Autonomous Chargeback Defense Agent built for the PayPal and AI Hackathon.
           </div>
           <div className="flex items-center gap-4">
             <button onClick={() => setIsAboutOpen(true)} className="hover:text-ink transition-colors">Methodology</button>
