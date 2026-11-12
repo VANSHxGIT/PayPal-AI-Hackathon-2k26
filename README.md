@@ -386,8 +386,8 @@ Evidentia is engineered as an event-driven, microservice-ready system:
 ### Step 1: Clone Repository & Configure Environment
 
 ```bash
-git clone https://github.com/your-username/Evidentia-AI.git
-cd Evidentia-AI
+git clone https://github.com/VANSHxGIT/PayPal-AI-Hackathon-2k26.git
+cd PayPal-AI-Hackathon-2k26
 ```
 
 Create a `.env` file in the `backend/` directory:
