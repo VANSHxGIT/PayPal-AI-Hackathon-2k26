@@ -1,471 +1,337 @@
-# ⚖️ Evidentia — Autonomous Chargeback & Dispute Defense Agent
+﻿# Evidentia — Autonomous PayPal Chargeback Defense Agent
 
-> **Built for the "Build What's Next with PayPal and AI" Hackathon**  
-> *Transforming PayPal dispute defense from hours of manual labor into an autonomous, 10-second background operation.*
+Evidentia is a full-stack prototype built for the PayPal + AI Hackathon. It simulates a merchant dispute-defense operating system that listens for PayPal dispute webhooks, retrieves shipping and CRM evidence, asks Google Gemini to synthesize a seller defense narrative, and submits a structured evidence package back to PayPal.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![PayPal API](https://img.shields.io/badge/PayPal-Disputes%20API%20%26%20Webhooks-003087.svg?logo=paypal)](https://developer.paypal.com/)
-[![AI Model](https://img.shields.io/badge/AI%20Model-Google%20Gemini%202.0-4285F4.svg?logo=google)](https://ai.google.dev/)
-[![Vector & Search](https://img.shields.io/badge/Sponsor-Elasticsearch-005571.svg?logo=elastic)](https://www.elastic.co/)
-[![UI Grid](https://img.shields.io/badge/Sponsor-AG%20Grid-E0234E.svg?logo=aggrid)](https://www.ag-grid.com/)
-[![Deployment](https://img.shields.io/badge/Sponsor-Render-46E3B7.svg?logo=render)](https://render.com/)
-[![Backend](https://img.shields.io/badge/Backend-FastAPI%20%7C%20Python%203.10+-009688.svg?logo=fastapi)](https://fastapi.tiangolo.com/)
-[![Frontend](https://img.shields.io/badge/Frontend-React%2018%20%7C%20Vite-61DAFB.svg?logo=react)](https://react.dev/)
+The project currently includes a FastAPI backend, a React + Vite frontend, SQLite persistence, security and rate-limiting controls, backup automation, and a live SSE terminal for demo visibility.
 
----
+## Overview
 
-## 📌 Table of Contents
-1. [Overview & Real-World Problem](#-overview--the-real-world-problem)
-2. [Practical Impacts & Real-World Business Value](#-practical-impacts--real-world-business-value)
-3. [Technologies Used](#-technologies-used)
-4. [How It Works (The 10-Second Autonomous Pipeline)](#-how-it-works-the-10-second-autonomous-pipeline)
-5. [System Architecture](#-system-architecture)
-6. [Key Features](#-key-features)
-7. [Sponsor & Technology Integrations](#-sponsor--technology-integrations)
-8. [Repository Structure](#-repository-structure)
-9. [Quickstart Guide](#-quickstart-guide)
-10. [Hackathon Compliance Checklist](#-hackathon-compliance-checklist)
-11. [License](#-license)
+The core workflow is:
 
----
+1. A PayPal dispute event arrives via the webhook endpoint.
+2. The backend extracts the dispute, amount, reason, and transaction metadata.
+3. The orchestrator queries a mock merchant evidence store for order, carrier, and CRM data.
+4. Gemini synthesizes a PayPal-aligned evidence note and selects an evidence type.
+5. The backend submits the packaged evidence to the PayPal sandbox API.
+6. The dispute record is stored in SQLite and shown in the merchant dashboard.
 
-## 🌍 Overview & The Real-World Problem
+This is designed as a demo-ready, secure, and operationally realistic foundation rather than a placeholder concept.
 
-### The \$100B+ Merchant Bleed: Chargebacks & "Friendly Fraud"
-Chargebacks and payment disputes are one of the most painful, expensive operational drains in global e-commerce:
-* **The Manual Labor Trap:** When a customer disputes a transaction (e.g., claiming *"Item Not Received"* or *"Unauthorized Purchase"*), the burden of proof falls entirely on the merchant. The merchant has a limited window (typically 10–20 days) to log into PayPal, decipher the dispute reason code, hunt down warehouse fulfillment records, retrieve carrier tracking numbers and signed delivery receipts, export customer support chat histories, write a persuasive legal statement, format files according to strict schema guidelines, and submit the response.
-* **Economic Surrender:** For small and medium enterprises (SMBs)—and even high-volume enterprise sellers—gathering this evidence manually costs **\$15 to \$45 in staff labor per claim**. When faced with disputes for orders under \$100, merchants frequently **surrender the dispute without contest**, forfeiting both their product and their revenue simply because defending the claim costs more than the item is worth.
-* **Loss of Merchant Standing:** High dispute-to-transaction ratios lead to penalized processing fees, rolling reserves, or suspended merchant accounts.
+## Current Project Status
 
-### The Solution: Evidentia
-**Evidentia** is an autonomous legal defense agent for PayPal merchants. The moment a dispute is lodged, Evidentia springs into action:
-1. It intercepts the incoming PayPal dispute webhook in real-time.
-2. It queries internal merchant databases via **Elastic** (orders, ERP systems, carrier delivery confirmations, and CRM chat logs).
-3. It passes the collected evidence and PayPal reason code to **Google Gemini**.
-4. Gemini reasons over the dispute, cross-references PayPal's Merchant Protection guidelines, drafts an airtight defense narrative, and strictly formats the response to PayPal's evidence JSON schema.
-5. It submits the evidence directly to the **PayPal Disputes API** (`POST /v1/customer/disputes/{id}/provide-evidence`).
-6. It displays the entire audit trail on a high-density **AG Grid** merchant dashboard with a live terminal event stream.
+The codebase has moved past the initial concept stage and now contains the production-style backend and frontend pieces expected for a real hackathon demo:
 
-**Zero manual intervention. Zero missed deadlines. Sub-10 second resolution.**
+- Secure authentication with JWT-based login/session lifecycle
+- Password hashing using PBKDF2 + salt
+- Role-based admin access control and tenant filtering
+- Pydantic validation for API payloads
+- Sliding-window rate limiting and failed-login lockouts
+- Security headers middleware and sanitized error responses
+- SQLite database models, migrations-by-create-all, and backup pruning
+- Live SSE event stream for webhook and defense pipeline updates
+- React dashboard with dispute ledger, evidence inspector, and simulated pipeline flow
+- Mock merchant data for shipping, delivery proof, and CRM chat evidence
 
----
+## Architecture Summary
 
-## 💼 Practical Impacts & Real-World Business Value
+### Backend
 
-Evidentia transforms dispute defense from a cost-prohibitive operational burden plagued by human friction and missed deadlines into a frictionless, automated competitive advantage.
+The Python backend is in `backend/app` and is built with FastAPI.
 
-### 1. Quantitative Impact & Operational Benchmarks
+Main modules:
 
-| Metric / Dimension | Traditional Manual Defense | Evidentia Autonomous Engine | Practical Impact / Improvement |
-| :--- | :--- | :--- | :--- |
-| **Response Time (MTTR)** | 3 to 14 business days | **Sub-10 seconds (< 8s avg)** | **99.9% reduction** — Eliminates risk of missed 10-day response deadlines |
-| **Operational Labor Cost** | \$20.00 – \$50.00 per claim in ops labor | **~\$0.002** in Gemini API compute | **99.99% cost reduction** — Defending claims costs fractions of a cent |
-| **Dispute Defense Coverage** | 15% – 30% (Only claims > \$100 defended) | **100% of all legitimate claims** | **3x–6x coverage increase** — Zero claims surrendered due to labor costs |
-| **Dispute Win Rate** | ~21% industry average (Manual submissions) | **65% – 75%+ estimated** | **3x+ win rate boost** via precise policy matching & proof synthesis |
-| **Submission Accuracy** | Prone to human error, missed PDFs, formatting errors | **100% schema-compliant JSON** | Direct conformance with PayPal's required `evidence_type` fields |
-| **Default Loss Rate** | 12% – 18% lost due to operational backlog | **0% default losses** | Immediate background execution the moment the webhook arrives |
-| **Merchant Health Standing** | Risk of exceeding 1% dispute-to-sales ratio | **Protected seller standing** | Lowers dispute ratios, avoids rolling reserves & elevated fees |
+- `backend/app/main.py` — application startup, middleware registration, and router inclusion
+- `backend/app/config.py` — environment settings and security-related configuration
+- `backend/app/database.py` — SQLAlchemy engine setup and SQLite hardening pragmas
+- `backend/app/models/db_models.py` — user and dispute data models
+- `backend/app/models/schemas.py` — API request/response validation
+- `backend/app/api/auth.py` — registration, login, logout, and profile endpoints
+- `backend/app/api/disputes.py` — dispute listing, lookup, and evidence inspection routes
+- `backend/app/api/webhooks.py` — PayPal webhook listener and async processing trigger
+- `backend/app/api/simulate.py` — sandbox dispute simulation endpoint
+- `backend/app/api/stream.py` — SSE log stream for live terminal
+- `backend/app/api/admin.py` — admin-only analytics and backup access
+- `backend/app/core/security.py` — JWT and password utility functions
+- `backend/app/core/rate_limiter.py` — request throttling and account lockout logic
+- `backend/app/core/dependencies.py` — JWT auth and admin enforcement
+- `backend/app/core/security_headers.py` — HSTS/CSP/X-Frame-Options enforcement
+- `backend/app/core/error_handlers.py` — sanitized API error formatting
+- `backend/app/core/logger.py` — live broadcast/logging component for SSE
+- `backend/app/services/dispute_orchestrator.py` — end-to-end workflow orchestration
+- `backend/app/services/elastic_service.py` — mock Elastic/RAG retrieval layer
+- `backend/app/services/gemini_service.py` — AI defense synthesis with deterministic fallback logic
+- `backend/app/services/paypal_client.py` — PayPal OAuth and dispute submission client
+- `backend/app/services/backup_service.py` — SQLite backup creation and retention cleanup
 
----
+### Frontend
 
-### 2. Eliminating the "Economic Surrender" Dilemma
+The frontend is in `frontend/src` and is implemented with React + Vite.
 
-In global e-commerce, **"Friendly Fraud"** (a customer dishonestly claiming non-receipt or requesting an unauthorized chargeback after receiving goods) accounts for over **70% of all disputed charges**.
+Key files:
 
-Merchants routinely face an economic paradox when defending lower-value transactions:
+- `frontend/src/App.jsx` — main merchant dashboard and simulation orchestration
+- `frontend/src/components/ProductThesisHero.jsx` — hero banner and metrics
+- `frontend/src/components/PipelineWorkflow.jsx` — four-stage architecture summary
+- `frontend/src/components/DisputeLedger.jsx` — AG Grid dispute table
+- `frontend/src/components/EvidenceInspector.jsx` — raw evidence vs AI defense viewer
+- `frontend/src/components/JudgeEvaluationMatrix.jsx` — criteria and security compliance panel
+- `frontend/src/components/LegalAndAboutModals.jsx` — legal text and methodology modals
+- `frontend/src/components/InteractiveCard3D.jsx` — animated merchant security card
+- `frontend/src/components/Icons.jsx` — custom UI icon set
+- `frontend/src/index.css` — main app styling
 
-```text
-The Traditional Economic Surrender Trap (Dispute for a $45 Order):
-  Dispute Transaction Value:       $45.00
-- Cost of Goods Sold (Lost):       $22.50
-- PayPal Dispute / Processing Fee: $20.00
-- Support Staff Time to Gather:    $30.00 (1.5 hours @ $20/hr hunting FedEx & CRM records)
-------------------------------------------------------------------------------------------
-Total Cost to Defend Manually:     $72.50 to recover $45.00  --> MERCHANT SURRENDERS CLAIM
+### Deployment and Environment
 
-With Evidentia Autonomous Defense:
-  Dispute Transaction Value:       $45.00
-- Operational Labor Cost:          $0.00  (Zero staff intervention required)
-- Compute & LLM Synthesis:        $0.002 (Gemini Flash token cost)
-- Time Expended:                   8 seconds end-to-end
-------------------------------------------------------------------------------------------
-Net Economic Outcome:              $45.00 recovered + $20 dispute fee saved for fractions of a cent!
-```
+- `render.yaml` — Render deployment spec for the backend
+- `main.py` — root-level app entry for cloud or uvicorn direct startup
+- `.env.example` — example environment variables for local configuration
 
-By eliminating marginal defense costs, Evidentia makes **every single dispute economically viable to defend**, plugging a major source of silent margin erosion.
+## Key Features Implemented
 
----
+### 1. Secure Payment-Defense Workflow
 
-### 3. Financial ROI by Merchant Scale
+The application models a realistic dispute pipeline with:
 
-| Merchant Profile | Monthly Disputes | Annual Manual Cost (Labor + Losses) | Annual Evidentia Cost | Net Annual Merchant Value |
-| :--- | :--- | :--- | :--- | :--- |
-| **Boutique SMB** (Shopify / PayPal seller) | 50 disputes / mo | ~\$24,000 / year | ~\$1.20 in compute | **+\$23,998 net annual savings** |
-| **Mid-Market Brand** (\$10M–\$50M GMV) | 500 disputes / mo | ~\$240,000 / year | ~\$12.00 in compute | **+\$239,988 net annual savings** |
-| **Enterprise Seller** (High-Volume GMV) | 5,000 disputes / mo | ~\$2,400,000 / year | ~\$120.00 in compute | **+\$2.39M+ recovered & saved** |
+- PayPal webhook ingestion for `CUSTOMER.DISPUTE.CREATED`
+- dispute evidence collection from seller-side records
+- AI-generated defense synthesis using Google Gemini
+- post-back evidence payload submission to PayPal sandbox
+- SQLite-backed persistence of dispute outcomes
 
----
+### 2. Merchant Authentication and Access Control
 
-### 4. Multi-Stakeholder Practical Impacts
+The backend includes:
 
-* **For Merchants & Operations Teams:**
-  * **Zero Operational Drag:** Support and finance teams no longer waste hours logging into multiple tools, cross-checking warehouse receipts, or writing legal statements.
-  * **Complete Auditability:** The dual-pane evidence inspector gives operations teams a transparent view into raw source records (Elastic) alongside the exact synthesized evidence package submitted to PayPal.
-  * **Preservation of Merchant Account Standing:** High dispute-to-transaction ratios can trigger PayPal's Dispute Monitoring Program, resulting in mandatory rolling reserves (holding 10%–20% of GMV) or elevated processing fees. Rapid, successful defense protects merchant liquidity.
+- user registration with role selection (`merchant` or `admin`)
+- JWT issuance and expiration metadata
+- token revocation support on logout
+- strict tenant filtering by `merchant_id`
+- admin-only endpoints protecting privileged actions
 
-* **For PayPal & the Payment Ecosystem:**
-  * **Shortened Dispute Lifecycles:** Disputes backed by clean, structured evidence reduce the resolution window for PayPal dispute specialists from weeks down to hours.
-  * **Zero Schema Incompatibilities:** Evidence is cleanly categorized into PayPal's expected enum categories (`PROOF_OF_FULFILLMENT`, `PROOF_OF_DELIVERY_SIGNATURE`, `RETURN_POLICY`, `CUSTOMER_COMMUNICATION`), eliminating unstructured, illegible evidence submissions.
-  * **Maximized Merchant Protection Adoption:** Bridges the gap between PayPal's robust Seller Protection policies and merchant compliance by ensuring all qualifying proof requirements are automatically fulfilled.
+### 3. Security Hardening
 
-* **For Consumers & Legitimate Buyers:**
-  * **Immediate Dispute Adjudication:** Legitimate claims (e.g., packages lost in transit with no carrier delivery scan) are identified quickly, enabling faster rightful refunds without merchant stalling.
-  * **Fraud Deterrence:** Creates a strong deterrent against serial return fraud and friendly chargebacks, fostering a healthier online marketplace.
+The current codebase explicitly implements several recommended controls:
 
----
+- salted password hashing with PBKDF2-HMAC-SHA256
+- rate limiting for login and webhook traffic
+- failed-login account lockout
+- secure CORS settings and API headers
+- validation with Pydantic models and strict schema constraints
+- hidden docs and trace behavior in production mode
+- sanitized exception responses with request reference IDs
 
-## 🛠️ Technologies Used
+### 4. Live Demo Experience
 
-Evidentia is engineered with an enterprise-ready, production-grade technology stack spanning asynchronous backend services, generative AI reasoning, RAG datastores, and financial data grids:
+The frontend includes:
 
-```text
-┌──────────────────────────────────────────────────────────────────────────────────────────┐
-│                                   Evidentia TECH STACK                              │
-├──────────────────────────┬──────────────────────────┬────────────────────────────────────┤
-│    LAYER                 │ TECHNOLOGY               │ PURPOSE & ARCHITECTURAL ROLE       │
-├──────────────────────────┼──────────────────────────┼────────────────────────────────────┤
-│ Backend API Engine       │ Python 3.10+, FastAPI    │ High-throughput asynchronous API   │
-│                          │ Uvicorn (ASGI)           │ Webhook listener & background jobs │
-├──────────────────────────┼──────────────────────────┼────────────────────────────────────┤
-│ Artificial Intelligence  │ Google Gemini 2.0 Flash  │ Multimodal evidence synthesis &    │
-│                          │ Gemini 1.5 Pro           │ Legal defense statement generation │
-├──────────────────────────┼──────────────────────────┼────────────────────────────────────┤
-│ RAG & Vector Datastore   │ Elasticsearch (Elastic)  │ Merchant ERP, tracking & CRM logs  │
-│ (Sponsor)                │ Elastic Cloud / REST API │ Sub-100ms vector & keyword search  │
-├──────────────────────────┼──────────────────────────┼────────────────────────────────────┤
-│ Enterprise UI & Grid     │ React 18, Vite           │ Modern reactive dashboard UI       │
-│ (Sponsor)                │ AG Grid Community/Ent.   │ High-density financial data table  │
-├──────────────────────────┼──────────────────────────┼────────────────────────────────────┤
-│ Real-Time Streaming      │ Server-Sent Events (SSE) │ Live pipeline terminal logs        │
-│                          │ Starlette EventSource    │ Low-latency browser push stream    │
-├──────────────────────────┼──────────────────────────┼────────────────────────────────────┤
-│ Payments & Disputes      │ PayPal Disputes REST API │ Programmatic evidence submission   │
-│                          │ PayPal Webhook Engine    │ Instant dispute event trigger      │
-├──────────────────────────┼──────────────────────────┼────────────────────────────────────┤
-│ Design & Iconography     │ TailwindCSS, Lucide      │ Modern dark-mode styling & icons   │
-├──────────────────────────┼──────────────────────────┼────────────────────────────────────┤
-│ Cloud & DevOps           │ Render (Sponsor)         │ Cloud hosting with public HTTPS    │
-│                          │ Docker, Docker Compose   │ Containerized environment parity   │
-└──────────────────────────┴──────────────────────────┴────────────────────────────────────┘
-```
+- a simulated dispute button
+- real-time terminal updates via SSE
+- a dispute ledger with filters and status badges
+- evidence comparison between raw records and AI output
+- tabs for scoring rubric and security matrix
 
-### Architectural Breakdown by Layer
+### 5. Operational Reliability
 
-#### 1. Backend & Asynchronous Microservices
-* **Python 3.10+ & FastAPI:** Powers the core API. FastAPI's asynchronous architecture handles incoming PayPal webhooks without thread-blocking, returning an instant `200 OK` acknowledgment to PayPal while dispatching the dispute resolution pipeline as an asynchronous background task.
-* **Pydantic v2:** Enforces strict validation and serialization across internal data structures, PayPal webhook payloads, and Gemini output models.
-* **HTTPX (Async Client):** Asynchronous HTTP client configured with connection pooling, keep-alive, and automated OAuth2 token caching for communication with the PayPal REST API.
+The codebase also includes:
 
-#### 2. Artificial Intelligence & Legal Reasoning
-* **Google Gemini (Gemini 2.0 Flash & Gemini 1.5 Pro):**
-  * Ingests multi-source evidence documents retrieved from Elasticsearch (carrier delivery receipts, signed GPS coordinates, CRM support chats, and store return policies).
-  * Synthesizes a compelling, legally persuasive defense statement that directly addresses the specific dispute reason code (e.g., `MERCHANDISE_OR_SERVICE_NOT_RECEIVED`, `UNAUTHORISED`).
-  * Enforces structured JSON schema decoding, ensuring output fields precisely match PayPal's required `evidence_type` and `evidence_info` specifications.
+- automatic database backup creation with retention pruning
+- SQLite WAL configuration and file permission hardening
+- background scheduler for recurring backup runs
+- mock data fallback when external services are absent
 
-#### 3. Vector Search & Retrieval-Augmented Generation (RAG)
-* **Elasticsearch / Elastic Cloud (Sponsor Integration):**
-  * Indexes merchant enterprise operational data across multiple indices:
-    * `merchant_orders`: Purchase records, item SKUs, buyer billing/shipping addresses, and invoice IDs.
-    * `carrier_tracking`: FedEx, UPS, and USPS tracking events, geo-coordinates, and signature proofs of delivery.
-    * `merchant_crm_chats`: Customer support transcripts, timestamps, and customer delivery confirmations.
-    * `merchant_policies`: Merchant terms of service, refund rules, and cancellation policies.
-  * Enables lightning-fast keyword and semantic vector search, giving the AI agent immediate access to ground-truth evidence records.
-
-#### 4. Frontend & Enterprise Data Grid
-* **React 18 & Vite:** Provides a high-speed Single-Page Application (SPA) with hot-module reloading and modular component architecture.
-* **AG Grid (Sponsor Integration):**
-  * Serves as the merchant dispute command center.
-  * Delivers enterprise-grade capabilities: multi-column sorting, granular filtering, responsive column pinning, status badges (`🟢 Auto-Defended`, `🟡 Processing`, `🔴 Manual Review Needed`), and instant row inspection.
-* **TailwindCSS & Lucide Icons:** Provides an enterprise dark-mode interface with glassmorphic cards, clear visual hierarchy, and intuitive status iconography.
-
-#### 5. Real-Time Telemetry & Event Streaming
-* **Server-Sent Events (SSE):** Implements a persistent, unidirectional HTTP event stream from FastAPI to the React client. As the pipeline progresses through webhook reception, Elastic querying, Gemini synthesis, and PayPal submission, micro-step logs stream live into the UI terminal with sub-second latency.
-
-#### 6. Payment Platform & Webhooks
-* **PayPal Disputes REST API (`/v1/customer/disputes`):** Automates dispute detail retrieval (`GET /v1/customer/disputes/{id}`) and evidence package dispatch (`POST /v1/customer/disputes/{id}/provide-evidence`).
-* **PayPal Webhooks API:** Listens for `CUSTOMER.DISPUTE.CREATED` events to initiate autonomous dispute defense in real-time.
-* **PayPal OAuth2 Engine:** Handles secure token retrieval and automatic refresh against PayPal Sandbox servers.
-
-#### 7. Cloud Deployment & DevOps
-* **Render (Sponsor Integration):** Deploys the FastAPI service with automated TLS/SSL certificate provisioning, providing the public HTTPS URL required for PayPal Sandbox webhook ingestion.
-* **Docker & Docker Compose:** Containerizes the application for uniform, reproducible execution across local development and cloud production environments.
-
----
-
-## ⚡ How It Works (The 10-Second Autonomous Pipeline)
-
-```mermaid
-sequenceDiagram
-    autonumber
-    actor Buyer as Buyer / Sandbox
-    participant PP as PayPal Sandbox API
-    participant WH as FastAPI Webhook Receiver
-    participant ORCH as Dispute Orchestrator
-    participant EL as Elastic Search (RAG)
-    participant AI as Google Gemini Engine
-    participant UI as AG Grid Dashboard
-
-    Buyer->>PP: Files Dispute ("Item Not Received")
-    PP->>WH: POST CUSTOMER.DISPUTE.CREATED
-    WH-->>PP: 200 OK (Instant Acknowledgment)
-    WH->>ORCH: Enqueue Dispute Job (ID: PP-D-99214)
-    ORCH->>UI: Stream Event: "Dispute Received"
-    ORCH->>PP: GET /v1/customer/disputes/{id} (Fetch Reason & Claim)
-    PP-->>ORCH: Dispute Metadata (Amount: $249.99, Txn: TXN-829104)
-    ORCH->>EL: Query TXN-829104 (Orders, FedEx Tracking, CRM Chats, Terms)
-    EL-->>ORCH: Evidence Documents (Signed FedEx Proof, Delivery Chat Logs)
-    ORCH->>UI: Stream Event: "Elastic Hit: 3 Correlated Evidence Records"
-    ORCH->>AI: Prompt Gemini with Dispute Context + Elastic Documents
-    AI-->>ORCH: Synthesized Defense Package + PayPal Formatted JSON
-    ORCH->>PP: POST /v1/customer/disputes/{id}/provide-evidence
-    PP-->>ORCH: 200 OK (Evidence Accepted)
-    ORCH->>UI: Update AG Grid Row: "🟢 Auto-Defended" & Push to Terminal
-```
-
----
-
-## 🏗️ System Architecture
-
-Evidentia is engineered as an event-driven, microservice-ready system:
+## Updated Repository Structure
 
 ```text
-┌────────────────────────────────────────────────────────────────────────┐
-│                          EXTERNAL ECOSYSTEM                            │
-│   ┌───────────────────────────┐      ┌─────────────────────────────┐   │
-│   │   PayPal Sandbox / APIs   │      │    Google Gemini (LLM)      │   │
-│   │   • Webhooks              │      │    • Evidence Synthesis     │   │
-│   │   • Disputes REST API     │      │    • Structured JSON Schema │   │
-│   └─────────────▲─────────────┘      └──────────────▲──────────────┘   │
-└─────────────────┼───────────────────────────────────┼──────────────────┘
-                  │ Webhook (HTTPS)                   │ AI Prompts
-                  ▼                                   ▼
-┌────────────────────────────────────────────────────────────────────────┐
-│                   FASTAPI BACKEND (Hosted on Render)                   │
-│                                                                        │
-│   ┌─────────────────────────┐         ┌────────────────────────────┐   │
-│   │  /api/webhooks/paypal   │────────▶│    Dispute Orchestrator    │   │
-│   │  (Signature Validation) │         │    (Async State Machine)   │   │
-│   └─────────────────────────┘         └──────────────┬─────────────┘   │
-│                                                      │                 │
-│         ┌────────────────────────────────────────────┼───────────┐     │
-│         ▼                                            ▼           ▼     │
-│   ┌───────────────┐                          ┌───────────────┐ ┌─────┐ │
-│   │ PayPal Client │                          │Elastic Service│ │ SSE │ │
-│   │ (OAuth2 Cache)│                          │ (RAG Query)   │ │Logs │ │
-│   └───────────────┘                          └───────┬───────┘ └──┬──┘ │
-└──────────────────────────────────────────────────────┼────────────┼────┘
-                                                       │            │
-                  ┌────────────────────────────────────┘            │
-                  ▼                                                 │
-┌───────────────────────────────────────────┐                       │
-│       ELASTIC DATASTORE (Sponsor)         │                       │
-│   • merchant_orders (Carrier & Signatures)│                       │
-│   • merchant_crm_chats (Customer Support) │                       │
-│   • merchant_policies (Terms & Refunds)   │                       │
-└───────────────────────────────────────────┘                       │
-                                                                    ▼
-┌────────────────────────────────────────────────────────────────────────┐
-│                   REACT FRONTEND (Vite + TailwindCSS)                  │
-│                                                                        │
-│   ┌────────────────────────────────────────────────────────────────┐   │
-│   │  AG Grid Dispute Command Center (Real-Time Merchant Grid)      │   │
-│   └────────────────────────────────┬───────────────────────────────┘   │
-│                                    │                                   │
-│   ┌────────────────────────────────▼───┐  ┌────────────────────────┐   │
-│   │   Dual-Pane Evidence Inspector     │  │  Live Pipeline Stream  │   │
-│   │   [Raw Elastic Logs | AI Defense]  │  │  (Real-Time Terminal)   │   │
-│   └────────────────────────────────────┘  └────────────────────────┘   │
-└────────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## ✨ Key Features
-
-1. **Zero-Click Autonomous Chargeback Defense:**
-   Listens for dispute webhooks, collects corroborating records, synthesizes legal arguments adhering to PayPal Merchant Protection requirements, and submits evidence automatically.
-
-2. **Google Gemini Reasoning Engine:**
-   Leverages Gemini's long context and structured generation to extract decisive facts (e.g., carrier name, tracking ID, delivery timestamp, signature match, customer acknowledgment in chat) and output an uncompromising legal defense.
-
-3. **Enterprise AG Grid Command Center:**
-   A high-density financial table featuring multi-column sorting, status filters, currency formatters, and status badges (`🟢 Auto-Defended`, `🟡 Processing`, `🔴 Manual Review Needed`).
-
-4. **Dual-Pane Evidence Inspector:**
-   Allows merchants to audit any auto-defended dispute:
-   * **Left Pane:** Raw unedited data from Elastic (shipping records, tracking events, CRM chat transcripts).
-   * **Right Pane:** The Gemini-synthesized legal statement and PayPal JSON payload submitted to PayPal.
-
-5. **Live Event Stream / Terminal:**
-   A real-time visual feed powered by Server-Sent Events (SSE) that displays each micro-step of the defense pipeline—providing immediate visual proof of the background automation for live demos.
-
-6. **One-Click Sandbox Simulation Bar:**
-   Enables judges and evaluators to trigger simulated dispute events with realistic shipping and chat evidence with a single click, testing the entire pipeline end-to-end without delay.
-
----
-
-## 🏆 Sponsor & Technology Integrations
-
-| Technology / Sponsor | Role & Implementation in Evidentia |
-| :--- | :--- |
-| **PayPal Sandbox APIs** | **Core Payment Platform:** Webhook listener for `CUSTOMER.DISPUTE.CREATED`, OAuth2 authentication, dispute enrichment via `GET /v1/customer/disputes/{id}`, and evidence submission via `POST /v1/customer/disputes/{id}/provide-evidence`. |
-| **Google Gemini** | **Primary AI Engine:** Evaluates dispute reason codes, analyzes shipping and customer chat records, and produces structured, schema-compliant defense statements. |
-| **Elastic (Sponsor)** | **RAG & Search Datastore:** Houses merchant order metadata, FedEx/UPS carrier tracking, signed delivery logs, and CRM chat archives for vector/keyword retrieval. |
-| **AG Grid (Sponsor)** | **Enterprise Dashboard UI:** Provides high-performance, filterable, and sortable data grids essential for enterprise merchant operations. |
-| **Render (Sponsor)** | **Cloud Hosting:** Hosts the FastAPI backend and webhooks with a stable public HTTPS URL required for PayPal Sandbox webhook delivery. |
-
----
-
-## 📁 Repository Structure
-
-```text
-├── backend/
-│   ├── app/
-│   │   ├── api/
-│   │   │   ├── webhooks.py             # PayPal Webhook listener endpoint
-│   │   │   ├── disputes.py             # Dispute records & inspection endpoints
-│   │   │   ├── stream.py               # SSE real-time terminal log stream
-│   │   │   └── simulate.py             # Demo simulation triggers
-│   │   ├── core/
-│   │   │   ├── config.py               # Environment configuration
-│   │   │   └── logger.py               # Live logging broadcaster
-│   │   ├── models/
-│   │   │   ├── paypal_schemas.py       # PayPal REST API Pydantic schemas
-│   │   │   └── evidence_schemas.py     # Gemini output schema models
-│   │   ├── services/
-│   │   │   ├── paypal_client.py        # PayPal OAuth2 & REST client
-│   │   │   ├── elastic_service.py      # Elastic RAG service & mock indexer
-│   │   │   ├── ai_agent.py             # Google Gemini synthesis engine
-│   │   │   └── dispute_orchestrator.py # End-to-end pipeline coordinator
-│   │   ├── mock_data/                  # Seed data: orders, chats, and return policies
-│   │   └── main.py                     # FastAPI entrypoint
-│   ├── requirements.txt
-│   └── Dockerfile
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── DisputeGrid.jsx         # AG Grid dispute table
-│   │   │   ├── EvidenceModal.jsx       # Raw vs. AI Evidence Inspector
-│   │   │   ├── LiveLogTerminal.jsx     # Live visual pipeline stream
-│   │   │   ├── Navbar.jsx              # Status bar & stats counter
-│   │   │   └── SimulationControls.jsx  # One-click demo triggers
-│   │   ├── hooks/                      # useDisputes, useLiveLogs
-│   │   ├── services/api.js             # Backend API client
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   ├── package.json
-│   └── vite.config.js
+.
 ├── .env.example
+├── .gitignore
 ├── LICENSE
 ├── README.md
-└── render.yaml
+├── main.py
+├── render.yaml
+├── backend/
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   ├── app/
+│   │   ├── __init__.py
+│   │   ├── config.py
+│   │   ├── database.py
+│   │   ├── main.py
+│   │   ├── api/
+│   │   │   ├── __init__.py
+│   │   │   ├── admin.py
+│   │   │   ├── auth.py
+│   │   │   ├── disputes.py
+│   │   │   ├── simulate.py
+│   │   │   ├── stream.py
+│   │   │   └── webhooks.py
+│   │   ├── core/
+│   │   │   ├── __init__.py
+│   │   │   ├── dependencies.py
+│   │   │   ├── error_handlers.py
+│   │   │   ├── logger.py
+│   │   │   ├── rate_limiter.py
+│   │   │   ├── security.py
+│   │   │   └── security_headers.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── db_models.py
+│   │   │   └── schemas.py
+│   │   ├── services/
+│   │   │   ├── __init__.py
+│   │   │   ├── backup_service.py
+│   │   │   ├── dispute_orchestrator.py
+│   │   │   ├── elastic_service.py
+│   │   │   ├── gemini_service.py
+│   │   │   └── paypal_client.py
+│   │   └── tests/
+│   │       └── test_security.py
+│   └── app/
+│       └── __pycache__/
+├── frontend/
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── index.html
+│   ├── vite.config.js
+│   ├── tailwind.config.js
+│   ├── postcss.config.js
+│   ├── dist/
+│   └── src/
+│       ├── App.jsx
+│       ├── index.css
+│       ├── main.jsx
+│       └── components/
+│           ├── DisputeLedger.jsx
+│           ├── EvidenceInspector.jsx
+│           ├── Icons.jsx
+│           ├── InteractiveCard3D.jsx
+│           ├── JudgeEvaluationMatrix.jsx
+│           ├── LegalAndAboutModals.jsx
+│           ├── PipelineWorkflow.jsx
+│           └── ProductThesisHero.jsx
+└── project_context.md
 ```
 
----
+## Environment Setup
 
-## 🚀 Quickstart Guide
+The project expects a root-level `.env` file because the backend configuration loads it from the repository root.
 
-### Prerequisites
-* **Python:** 3.10 or higher
-* **Node.js:** v18 or higher (npm / pnpm)
-* **PayPal Developer Account:** Client ID and Secret (Sandbox)
-* **Google Gemini API Key:** From [Google AI Studio](https://aistudio.google.com/)
-
----
-
-### Step 1: Clone Repository & Configure Environment
+Copy the sample file:
 
 ```bash
-git clone https://github.com/VANSHxGIT/PayPal-AI-Hackathon-2k26.git
-cd PayPal-AI-Hackathon-2k26
+cp .env.example .env
 ```
 
-Create a `.env` file in the `backend/` directory:
+Example variables:
+
 ```env
-# PayPal Sandbox Credentials
-PAYPAL_CLIENT_ID=your_paypal_sandbox_client_id
-PAYPAL_CLIENT_SECRET=your_paypal_sandbox_client_secret
-PAYPAL_MODE=sandbox
-
-# Google Gemini API
-GEMINI_API_KEY=your_google_gemini_api_key
-GEMINI_MODEL=gemini-2.0-flash
-
-# Elastic Connection (Optional: Cloud URL or local fallback)
-ELASTICSEARCH_URL=http://localhost:9200
-ELASTICSEARCH_API_KEY=your_elastic_api_key
-
-# Backend Host
+ENVIRONMENT=development
+DEBUG=true
 PORT=8000
+HOST=0.0.0.0
+DATABASE_URL=sqlite:///./Evidentia.db
+JWT_SECRET_KEY=replace_with_a_secure_secret
+PAYPAL_MODE=sandbox
+PAYPAL_CLIENT_ID=mock_paypal_client_id
+PAYPAL_CLIENT_SECRET=mock_paypal_client_secret
+GEMINI_API_KEY=mock_gemini_api_key
+GEMINI_MODEL=gemini-2.0-flash
+ELASTICSEARCH_URL=http://localhost:9200
 ```
 
----
+## Quick Start
 
-### Step 2: Setup & Run Backend
+### 1) Install backend dependencies
 
 ```bash
 cd backend
-python -m venv venv
-# On Windows:
-.\venv\Scripts\activate
-# On macOS/Linux:
-source venv/bin/activate
-
+python -m venv .venv
+# Windows
+.\.venv\Scripts\activate
+# macOS/Linux
+source .venv/bin/activate
 pip install -r requirements.txt
-python -m uvicorn app.main:app --reload --port 8000
 ```
-* Backend API documentation available at: `http://localhost:8000/docs`
 
----
+### 2) Start the backend
 
-### Step 3: Setup & Run Frontend
+From the `backend` directory:
+
+```bash
+python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+API docs are available at:
+
+- `http://localhost:8000/docs`
+- `http://localhost:8000/redoc`
+
+### 3) Start the frontend
 
 Open a second terminal:
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-* Dashboard available at: `http://localhost:5173`
 
----
+The dashboard runs at:
 
-### Step 4: Run an End-to-End Test
+- `http://localhost:5173`
 
-1. Open the dashboard at `http://localhost:5173`.
-2. Click **`⚡ Simulate Dispute (Item Not Received)`** in the top action bar.
-3. Watch the **Live Pipeline Terminal** stream each step in real time:
-   * Webhook received $\to$ Elastic RAG query $\to$ Google Gemini legal synthesis $\to$ PayPal submission.
-4. Click on the auto-defended row in **AG Grid** to inspect the evidence package.
+## Available API Endpoints
 
----
+### Auth
 
-## 📋 Hackathon Compliance Checklist
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `GET /api/auth/me`
+- `POST /api/auth/logout`
 
-- [x] **Meaningful PayPal API Integration:** Implements PayPal Webhooks (`CUSTOMER.DISPUTE.CREATED`), OAuth2 token lifecycle, dispute detail retrieval, and evidence submission (`/v1/customer/disputes/{id}/provide-evidence`).
-- [x] **Meaningful AI Integration:** Uses **Google Gemini** for multimodal reasoning and automated legal synthesis to defend against chargebacks.
-- [x] **PayPal Sandbox Adherence:** Operates purely within the free PayPal Developer Sandbox environment.
-- [x] **Sponsor Tool Utilization:**
-  - **Elastic:** Vector & document retrieval simulating merchant ERP/CRM records.
-  - **AG Grid:** Enterprise-tier merchant data grid with custom badges and filters.
-  - **Render:** Cloud deployment for stable public webhook ingestion.
-- [x] **Open Source License:** Distributed under the permissive [MIT License](LICENSE).
-- [x] **Public Codebase & Clear Instructions:** Complete step-by-step setup guide and documented architecture.
+### Disputes
 
----
+- `GET /api/disputes`
+- `GET /api/disputes/{dispute_id}`
+- `GET /api/disputes/{dispute_id}/evidence-inspector`
 
-## 📄 License
+### Webhooks and Simulation
 
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+- `POST /api/webhooks/paypal`
+- `POST /api/simulate/dispute`
 
-Copyright (c) 2026 Vansh Rawat.
+### Streaming and Admin
+
+- `GET /api/stream/logs`
+- `GET /api/admin/stats`
+- `GET /api/admin/users`
+- `POST /api/admin/backups/create`
+- `GET /api/admin/backups`
+- `GET /api/admin/security-status`
+
+## Demo Workflow
+
+1. Open the dashboard in the browser.
+2. Click the simulation button in the hero/bar area.
+3. Watch the SSE terminal for webhook, retrieval, synthesis, and PayPal activity.
+4. Inspect the updated dispute row in the AG Grid ledger.
+5. Open the evidence inspector to compare raw evidence with AI legal synthesis.
+
+## Validation Notes
+
+The backend contains security and infrastructure checks in `backend/tests/test_security.py` covering:
+
+- secret masking
+- password hashing and JWT lifecycle
+- rate limiting
+- lockout logic
+- database backup creation
+- production debug-mode behavior
+
+## License
+
+This project is licensed under the MIT License. See `LICENSE` for details.
+
+## Summary
+
+The codebase is now a working, demo-ready chargeback defense application with real security controls, operational flows, and a polished UI — not just a concept document. The README reflects the current implementation rather than the original early-stage architecture notes.
